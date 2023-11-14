@@ -35,13 +35,13 @@ shell:
 admin:
 	python manage.py createsuperuser
 
+# Создать или обновить директорию, указанную в STATIC_ROOT, собрав все статические файлы.
+static:
+	python manage.py collectstatic
+
 # Создать локали для русского языка
 loc_ru:
 	python manage.py makemessages -l ru
-
-# Создать локали для английского языка
-loc_en:
-	python manage.py makemessages -l en
 
 # Компилировать локали
 loc_comp:
