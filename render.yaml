@@ -6,6 +6,7 @@ databases:
 services:
   - type: web
     name: task-manager
+    runtime: python
     envVars:
       - key: DATABASE_URL
         fromDatabase:
