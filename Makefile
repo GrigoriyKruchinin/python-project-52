@@ -12,7 +12,7 @@ version:
 
 # Запуск приложения в product среде
 start:
-	gunicorn task_manager.wsgi
+	gunicorn task_manager.wsgi:application
 
 # Запуск приложения в среде разработки
 dev:
