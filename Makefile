@@ -34,7 +34,7 @@ migrate:
 # python manage.py sqlmigrate article 0001
 
 shell:
-	python manage.py shell
+	django-admin shell
 
 admin:
 	python manage.py createsuperuser
