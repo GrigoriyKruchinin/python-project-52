@@ -10,3 +10,6 @@ python manage.py collectstatic --no-input
 
 # Применение миграций
 python manage.py migrate
+
+# Компиляция сообщений для локалей
+python manage.py compilemessages
