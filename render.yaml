@@ -2,10 +2,6 @@ databases:
   - name: task_manager_db
     databaseName: task_manager_ggfo
     user: grisha
-    password: DhL0vYlO0yhzpxSg4HXIWWVmUXoza43s
-    host: dpg-cl9knbto7jlc73ff5la0-a.frankfurt-postgres.render.com
-    port: 5432
-    ssl: true
 
 services:
   - type: web
