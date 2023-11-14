@@ -36,7 +36,9 @@ admin:
 	python manage.py createsuperuser
 
 # Создать или обновить директорию, указанную в STATIC_ROOT, собрав все статические файлы.
-static:
+# Сделать это нужно с DEBUG=True и DEBUG=False
+
+static_files:
 	python manage.py collectstatic
 
 # Создать локали для русского языка

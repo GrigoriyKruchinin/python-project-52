@@ -63,6 +63,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -158,6 +159,18 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Путь, куда будут собраны статические файлы для обслуживания в продакшне
 STATIC_ROOT = BASE_DIR / "static_root"
+
+# Рекомендации для Render
+if not DEBUG:
+    # Указываем Django скопировать статические файлы в директорию `staticfiles`
+    # в  приложении на Render.
+    STATIC_ROOT = BASE_DIR / "staticfiles"
+
+    # Включаем хранение статических файлов в WhiteNoise,
+    # который занимается их сжатием и созданием уникальных имен для каждой версии.
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
