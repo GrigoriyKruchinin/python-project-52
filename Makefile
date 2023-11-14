@@ -40,7 +40,7 @@ static:
 	python manage.py collectstatic
 
 # Создать локали для русского языка
-loc_ru:
+loc:
 	python manage.py makemessages -l ru
 
 # Компилировать локали
