@@ -22,9 +22,13 @@ commands:
 	python manage.py
 
 
-# Создать миграцию и Применить миграцию
+# Создать миграцию 
+migrations:
+	python manage.py makemigrations
+
+# Применить миграцию
 migrate:
-	python manage.py makemigrations && python manage.py migrate
+	python manage.py migrate
 
 # посмотреть, какой SQL-запрос будет выполняться при запуске миграции
 # python manage.py sqlmigrate article 0001
