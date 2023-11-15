@@ -6,7 +6,11 @@ __pycache__/
 # data for db on render.com
 psql_render.txt
 
+# bootsrap tamplates
 bs5/
+
+# vscode
+.vscode/
 
 admin.txt
 # C extensions

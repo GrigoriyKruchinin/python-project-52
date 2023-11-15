@@ -33,12 +33,12 @@ DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = []
 
-# Получить значение переменной окружения RENDER_EXTERNAL_HOSTNAME
+# Get value RENDER_EXTERNAL_HOSTNAME
 RENDER_EXTERNAL_HOSTNAME = os.getenv('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
-# Добавьть текущий список хостов
+# Add current list of hosts
 ALLOWED_HOSTS += [
     'webserver',
     'localhost',
@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_bootstrap5',
     'task_manager',
+    'task_manager.users',
 ]
 
 MIDDLEWARE = [
