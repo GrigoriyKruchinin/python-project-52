@@ -4,26 +4,28 @@
 
 {% block content %}
 
-<h2>Список пользователей</h2>
-<table>
-<thead>
+<div class="container mt-4">
+<h2 class="mb-4">Пользователи</h2>
+<table class="table">
+    <thead class="table-dark">
     <tr>
         <th>ID</th>
         <th>Имя пользователя</th>
         <th>Полное имя</th>
         <th>Дата создания</th>
     </tr>
-</thead>
-<tbody>
-    {% for user in users %}
-            <tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
             <td>{{ user.id }}</td>
             <td>{{ user.username }}</td>
             <td>{{ user.get_full_name }}</td>
             <td>{{ user.date_joined }}</td>
         </tr>
     {% endfor %}
-</tbody>
+    </tbody>
 </table>
+</div>
 
 {% endblock content %}
