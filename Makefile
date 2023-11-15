@@ -1,7 +1,7 @@
 # Создать Django проект
-# django-admin startproject task_manager .
+# django-admin startproject <project_name> .
 
-# Создать приложение. Для этого нужно находиться в главном пакете проекта (task_manager)
+# Создать приложение. Для этого нужно находиться в главном пакете проекта (<project_name>)
 # django-admin startapp <name_app>
 
 install:
