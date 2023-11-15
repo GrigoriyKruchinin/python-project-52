@@ -155,16 +155,16 @@ LOCALE_PATHS = [BASE_DIR / 'locale']
 STATIC_URL = '/static/'
 
 # Пути, где Django будет искать статические файлы в процессе разработки
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [BASE_DIR / "task_manager" / "static"]
 
-# Путь, куда будут собраны статические файлы для обслуживания в продакшне
-STATIC_ROOT = BASE_DIR / "static_root"
+# Путь, куда будут собраны статические файлы для обслуживания в разработке
+STATIC_ROOT = BASE_DIR / "static_root" / "dev"
 
 # Рекомендации для Render
 if not DEBUG:
     # Указываем Django скопировать статические файлы в директорию `staticfiles`
     # в  приложении на Render.
-    STATIC_ROOT = BASE_DIR / "staticfiles"
+    STATIC_ROOT = BASE_DIR / "static_root" / 'prod'
 
     # Включаем хранение статических файлов в WhiteNoise,
     # который занимается их сжатием и созданием уникальных имен для каждой версии.
