@@ -46,7 +46,7 @@ ALLOWED_HOSTS += [
     'task-manager-ytvh.onrender.com',
 ]
 
-
+AUTH_USER_MODEL = 'users.User'
 # Application definition
 
 INSTALLED_APPS = [
