@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-14 09:30+0000\n"
+"POT-Creation-Date: 2023-11-16 09:41+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
 #: task_manager/templates/base.html:12
 msgid "Task manager Hexlet"
 msgstr "Менеджер задач Hexlet"
@@ -28,6 +29,7 @@ msgid "Task manager"
 msgstr "Менеджер задач"
 
 #: task_manager/templates/base.html:24
+#: task_manager/templates/users/index.html:8
 msgid "Users"
 msgstr "Пользователи"
 
@@ -54,3 +56,21 @@ msgstr "Практические курсы по программировани�
 #: task_manager/templates/index.html:11
 msgid "Show more"
 msgstr "Узнать больше"
+
+#: task_manager/templates/users/index.html:12
+msgid "ID"
+msgstr "ID"
+
+#: task_manager/templates/users/index.html:13
+#, fuzzy
+#| msgid "Users"
+msgid "Username"
+msgstr "Пользователи"
+
+#: task_manager/templates/users/index.html:14
+msgid "Full Name"
+msgstr "Полное имя"
+
+#: task_manager/templates/users/index.html:15
+msgid "Creation Date"
+msgstr "Дата создания"
