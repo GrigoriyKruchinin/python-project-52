@@ -43,7 +43,7 @@ ALLOWED_HOSTS += [
     'webserver',
     'localhost',
     '127.0.0.1',
-    'task-manager-ytvh.onrender.com',
+    #'task-manager-ytvh.onrender.com',
 ]
 
 AUTH_USER_MODEL = 'users.User'
