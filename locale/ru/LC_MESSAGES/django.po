@@ -62,10 +62,8 @@ msgid "ID"
 msgstr "ID"
 
 #: task_manager/templates/users/index.html:13
-#, fuzzy
-#| msgid "Users"
 msgid "Username"
-msgstr "Пользователи"
+msgstr "Имя пользователя"
 
 #: task_manager/templates/users/index.html:14
 msgid "Full Name"
