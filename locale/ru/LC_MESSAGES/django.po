@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-16 09:41+0300\n"
+"POT-Creation-Date: 2023-11-16 13:59+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,17 +45,21 @@ msgstr "Регистрация"
 msgid "Hexlet"
 msgstr "Hexlet"
 
-#: task_manager/templates/index.html:7
+#: task_manager/templates/index.html:8
 msgid "Hello from Hexlet!"
 msgstr "Привет от Хекслета!"
 
-#: task_manager/templates/index.html:9
+#: task_manager/templates/index.html:10
 msgid "Practical programming courses"
 msgstr "Практические курсы по программированию"
 
-#: task_manager/templates/index.html:11
+#: task_manager/templates/index.html:12
 msgid "Show more"
 msgstr "Узнать больше"
+
+#: task_manager/templates/login_form.html:11
+msgid "Entry"
+msgstr "Вход"
 
 #: task_manager/templates/users/index.html:12
 msgid "ID"
@@ -72,3 +76,15 @@ msgstr "Полное имя"
 #: task_manager/templates/users/index.html:15
 msgid "Creation Date"
 msgstr "Дата создания"
+
+#: task_manager/views.py:15
+msgid "You are logged in"
+msgstr "Вы залогинены"
+
+#: task_manager/views.py:18
+msgid "Log in"
+msgstr "Вход"
+
+#: task_manager/views.py:26
+msgid "You are logged out"
+msgstr "Вы разлогинены"

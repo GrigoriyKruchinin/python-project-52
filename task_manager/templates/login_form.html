@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<body class="d-flex flex-column min-vh-100">
+    <div class="container d-flex align-items-center justify-content-center h-100">
+        <div class="card bg-light border-0 shadow mt-5" style="width: 25%;">
+            <div class="card-body">
+                <h1 class="text-center mb-4">{% trans "Entry" %}</h1>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% bootstrap_button button_text button_type="submit" button_class="btn btn-primary mx-auto d-block" %}
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock content %}

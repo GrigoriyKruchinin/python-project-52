@@ -1,6 +1,7 @@
-from django.urls import path
-from task_manager.users.views import IndexView
+import django.urls
+from task_manager.users.views import UsersListView
+from django.urls import path, include
 
 urlpatterns = [
-    path('', IndexView.as_view(), name='users'),
+    path('', UsersListView.as_view(), name='users'),
 ]
