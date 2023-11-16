@@ -31,20 +31,17 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'webserver',
+    'localhost',
+    '127.0.0.1',
+]
 
-# Get value RENDER_EXTERNAL_HOSTNAME by render.com
+# Add render host
 RENDER_EXTERNAL_HOSTNAME = os.getenv('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
-# Add current list of hosts
-ALLOWED_HOSTS += [
-    'webserver',
-    'localhost',
-    '127.0.0.1',
-    #'task-manager-ytvh.onrender.com',
-]
 
 AUTH_USER_MODEL = 'users.User'
 # Application definition
