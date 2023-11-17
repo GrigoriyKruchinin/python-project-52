@@ -23,7 +23,7 @@ class UserCreateView(CreateView, SuccessMessageMixin):
     }
 
 
-class UserUpdateViews(UpdateView, SuccessMessageMixin):
+class UserUpdateView(UpdateView, SuccessMessageMixin):
     pass
 
 
