@@ -1,12 +1,21 @@
-from django.shortcuts import render
-from django.views import View
 from task_manager.users.models import User
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+# from django.utils.translation import gettext_lazy as _
 
 
-class UsersListView(View):
+class UsersListView(ListView):
+    template_name = 'users/index.html'
+    model = User
+    context_object_name = 'users'
 
-    def get(self, request, *args, **kwargs):
-        users = User.objects.all()
-        return render(request, 'users/index.html', context={
-            'users': users,
-        })
+
+class UserCreateView(CreateView):
+    pass
+
+
+class UserUpdateViews(UpdateView):
+    pass
+
+
+class UserDeleteView(DeleteView):
+    pass

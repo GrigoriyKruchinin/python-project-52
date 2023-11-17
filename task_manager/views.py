@@ -11,17 +11,14 @@ class IndexView(TemplateView):
 
 
 class UserLoginView(SuccessMessageMixin, LoginView):
+    template_name = 'login_form.html'
     next_page = reverse_lazy('home')
     success_message = _('You are logged in')
-    template_name = 'login_form.html'
-    extra_context = {
-        'button_text': _('Log in'),
-    }
 
 
 class UserLogoutView(LogoutView):
     next_page = reverse_lazy('home')
-    
+
     def dispatch(self, request, *args, **kwargs):
         messages.info(request, _('You are logged out'))
         return super().dispatch(request, *args, **kwargs)

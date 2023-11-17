@@ -13,7 +13,7 @@
                 <form method="post">
                     {% csrf_token %}
                     {% bootstrap_form form %}
-                    {% bootstrap_button button_text button_type="submit" button_class="btn btn-primary mx-auto d-block" %}
+                    {% bootstrap_button button_type="submit" button_class="btn btn-primary mx-auto d-block" content=_("Log in") %}
                 </form>
             </div>
         </div>
