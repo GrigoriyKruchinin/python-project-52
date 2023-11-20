@@ -30,6 +30,10 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'form.html'
     model = User
     form_class = UpdateUserForm
+    extra_context = {
+        'title': _('Update user'),
+        'button_text': _('Update'),
+    }
     pass
 
 
