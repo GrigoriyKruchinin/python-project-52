@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-17 13:53+0300\n"
+"POT-Creation-Date: 2023-11-20 13:50+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,7 +37,7 @@ msgstr "Пользователи"
 msgid "Login"
 msgstr "Вход"
 
-#: task_manager/templates/base.html:29 task_manager/users/views.py:16
+#: task_manager/templates/base.html:29 task_manager/users/views.py:24
 msgid "Registration"
 msgstr "Регистрация"
 
@@ -81,7 +81,31 @@ msgstr "Изменить"
 msgid "Delete"
 msgstr "Удалить"
 
-#: task_manager/users/views.py:17
+#: task_manager/users/forms.py:23
+msgid "Password"
+msgstr "Пароль"
+
+#: task_manager/users/forms.py:27
+msgid "Your password must be at least 3 characters long."
+msgstr "Ваш пароль должен содержать как минимум 3 символа."
+
+#: task_manager/users/forms.py:30
+msgid "Password confirmation"
+msgstr "Подтверждение пароля"
+
+#: task_manager/users/forms.py:34
+msgid "To confirm, please enter your password again."
+msgstr "Для подтверждения введите, пожалуйста, пароль ещё раз."
+
+#: task_manager/users/forms.py:51
+msgid "Passwords don't match"
+msgstr "Пароли не совпадают"
+
+#: task_manager/users/views.py:22
+msgid "User is successfully registered"
+msgstr "Пользователь успешно зарегистрирован"
+
+#: task_manager/users/views.py:25
 msgid "Sign up"
 msgstr "Зарегистрироваться"
 
@@ -100,3 +124,9 @@ msgstr "Войти"
 #: task_manager/views.py:27
 msgid "You are logged out"
 msgstr "Вы разлогинены"
+
+#~ msgid "User is successfully updated"
+#~ msgstr "Пользователь успешно изменен"
+
+#~ msgid "Edit user"
+#~ msgstr "Изменение пользователя"

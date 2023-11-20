@@ -1,9 +1,11 @@
 from task_manager.users.models import User
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.utils.translation import gettext_lazy as _
-from .forms import CreateUserForm
+from .forms import RegisterUserForm, UpdateUserForm
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 class UsersListView(ListView):
@@ -14,7 +16,8 @@ class UsersListView(ListView):
 
 class UserCreateView(CreateView, SuccessMessageMixin):
     template_name = 'form.html'
-    form_class = CreateUserForm
+    model = User
+    form_class = RegisterUserForm
     success_url = reverse_lazy('login')
     success_message = _('User is successfully registered')
     extra_context = {
@@ -23,7 +26,10 @@ class UserCreateView(CreateView, SuccessMessageMixin):
     }
 
 
-class UserUpdateView(UpdateView, SuccessMessageMixin):
+class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    template_name = 'form.html'
+    model = User
+    form_class = UpdateUserForm
     pass
 
 
