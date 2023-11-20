@@ -7,7 +7,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-
 class UsersListView(ListView):
     template_name = 'users/index.html'
     model = User
@@ -30,11 +29,13 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'form.html'
     model = User
     form_class = UpdateUserForm
+    success_url = reverse_lazy('users')
+    success_message = _('User is successfully updated')
     extra_context = {
         'title': _('Update user'),
         'button_text': _('Update'),
     }
-    pass
+
 
 
 class UserDeleteView(DeleteView, SuccessMessageMixin):
