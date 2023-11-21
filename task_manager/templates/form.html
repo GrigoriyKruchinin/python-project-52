@@ -8,12 +8,24 @@
     <div class="container d-flex align-items-center justify-content-center h-100">
         <div class="card bg-light border-0 shadow mt-5" style="width: 40%;">
             <div class="card-body">
+
                 <h1 class="text-center mb-4">{{ header }}</h1>
-                
+
+                {% if deletion_question %}
+                    <p>{{ deletion_question }} {{ user.get_full_name }}?</p>
+                {% endif %}
+
                 <form method="post">
                     {% csrf_token %}
                     {% bootstrap_form form %}
-                    {% bootstrap_button button_text button_type="submit" button_class="btn btn-primary" %}                </form>
+                    
+                    {% if deletion_question %}
+                        {% bootstrap_button button_text button_type="submit" button_class="btn btn-danger" %}
+                    {% else %}
+                        {% bootstrap_button button_text button_type="submit" button_class="btn btn-primary" %}
+                    {% endif %}
+                </form>
+                
             </div>
         </div>
     </div>

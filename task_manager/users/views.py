@@ -39,4 +39,12 @@ class UserUpdateView(UserPermissionMixin, SuccessMessageMixin, UpdateView):
 
 
 class UserDeleteView(UserPermissionMixin, DeleteView, SuccessMessageMixin):
-    pass
+    template_name = 'form.html'
+    model = User
+    success_url = reverse_lazy('users')
+    success_message = _('User successfully deleted')
+    extra_context = {
+        'header': _('Delete user'),
+        'deletion_question': _('Are you sure you want to remove'),
+        'button_text': _('Yes, delete'),
+    }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-21 10:25+0300\n"
+"POT-Creation-Date: 2023-11-21 12:47+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
-
 #: task_manager/templates/base.html:12
 msgid "Task manager Hexlet"
 msgstr "Менеджер задач Hexlet"
@@ -53,7 +52,7 @@ msgstr "Выход"
 msgid "Login"
 msgstr "Вход"
 
-#: task_manager/templates/base.html:38 task_manager/users/views.py:25
+#: task_manager/templates/base.html:38 task_manager/users/views.py:24
 msgid "Registration"
 msgstr "Регистрация"
 
@@ -89,7 +88,7 @@ msgstr "Полное имя"
 msgid "Creation Date"
 msgstr "Дата создания"
 
-#: task_manager/templates/users/index.html:29 task_manager/users/views.py:38
+#: task_manager/templates/users/index.html:29 task_manager/users/views.py:37
 msgid "Update"
 msgstr "Изменить"
 
@@ -113,31 +112,49 @@ msgstr "Подтверждение пароля"
 msgid "To confirm, please enter your password again."
 msgstr "Для подтверждения введите, пожалуйста, пароль ещё раз."
 
-#: task_manager/users/forms.py:51
+#: task_manager/users/forms.py:52
 msgid "Passwords don't match"
 msgstr "Пароли не совпадают"
 
-#: task_manager/users/views.py:23
+#: task_manager/users/mixins.py:20
+msgid "You are not logged in! Please log in."
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
+
+#: task_manager/users/mixins.py:25
+msgid "You don't have permissions to modify another user."
+msgstr "У вас нет прав для изменения другого пользователя."
+
+#: task_manager/users/views.py:22
 msgid "User is successfully registered"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: task_manager/users/views.py:26
+#: task_manager/users/views.py:25
 msgid "Sign up"
 msgstr "Зарегистрироваться"
 
-#: task_manager/users/views.py:35
+#: task_manager/users/views.py:34
 msgid "User is successfully updated"
 msgstr "Пользователь успешно изменен"
 
-#: task_manager/users/views.py:37
-#, fuzzy
-#| msgid "Update"
+#: task_manager/users/views.py:36
 msgid "Update user"
 msgstr "Изменить"
 
-#: task_manager/users/views.py:44
-msgid "You don't have permissions to modify another user."
-msgstr "У вас нет прав для изменения другого пользователя."
+#: task_manager/users/views.py:45
+msgid "User successfully deleted"
+msgstr "Пользователь успешно удален"
+
+#: task_manager/users/views.py:47
+msgid "Delete user"
+msgstr "Удалить"
+
+#: task_manager/users/views.py:48
+msgid "Are you sure you want to remove"
+msgstr "Вы уверены, что хотите удалить"
+
+#: task_manager/users/views.py:49
+msgid "Yes, delete"
+msgstr "Да, удалить"
 
 #: task_manager/views.py:16
 msgid "You are logged in"
@@ -154,9 +171,3 @@ msgstr "Войти"
 #: task_manager/views.py:27
 msgid "You are logged out"
 msgstr "Вы разлогинены"
-
-#~ msgid "You can't update other users"
-#~ msgstr "У вас нет прав для изменения другого пользователя."
-
-#~ msgid "Edit user"
-#~ msgstr "Изменение пользователя"
