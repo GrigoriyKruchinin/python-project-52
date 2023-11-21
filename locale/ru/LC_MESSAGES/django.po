@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-20 13:50+0300\n"
+"POT-Creation-Date: 2023-11-21 10:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,55 +29,71 @@ msgid "Task manager"
 msgstr "Менеджер задач"
 
 #: task_manager/templates/base.html:24
-#: task_manager/templates/users/index.html:8
+#: task_manager/templates/users/index.html:10
 msgid "Users"
 msgstr "Пользователи"
 
+#: task_manager/templates/base.html:26
+msgid "Statuses"
+msgstr "Статусы"
+
+#: task_manager/templates/base.html:27
+msgid "Labels"
+msgstr "Метки"
+
 #: task_manager/templates/base.html:28
+msgid "Tasks"
+msgstr "Задания"
+
+#: task_manager/templates/base.html:35
+msgid "Logout"
+msgstr "Выход"
+
+#: task_manager/templates/base.html:37
 msgid "Login"
 msgstr "Вход"
 
-#: task_manager/templates/base.html:29 task_manager/users/views.py:24
+#: task_manager/templates/base.html:38 task_manager/users/views.py:25
 msgid "Registration"
 msgstr "Регистрация"
 
-#: task_manager/templates/base.html:49
+#: task_manager/templates/base.html:63
 msgid "Hexlet"
 msgstr "Hexlet"
 
-#: task_manager/templates/index.html:8
+#: task_manager/templates/index.html:9
 msgid "Hello from Hexlet!"
 msgstr "Привет от Хекслета!"
 
-#: task_manager/templates/index.html:10
+#: task_manager/templates/index.html:11
 msgid "Practical programming courses"
 msgstr "Практические курсы по программированию"
 
-#: task_manager/templates/index.html:12
+#: task_manager/templates/index.html:13
 msgid "Show more"
 msgstr "Узнать больше"
 
-#: task_manager/templates/users/index.html:12
+#: task_manager/templates/users/index.html:14
 msgid "ID"
 msgstr "ID"
 
-#: task_manager/templates/users/index.html:13
+#: task_manager/templates/users/index.html:15
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: task_manager/templates/users/index.html:14
+#: task_manager/templates/users/index.html:16
 msgid "Full Name"
 msgstr "Полное имя"
 
-#: task_manager/templates/users/index.html:15
+#: task_manager/templates/users/index.html:17
 msgid "Creation Date"
 msgstr "Дата создания"
 
-#: task_manager/templates/users/index.html:27
+#: task_manager/templates/users/index.html:29 task_manager/users/views.py:38
 msgid "Update"
 msgstr "Изменить"
 
-#: task_manager/templates/users/index.html:29
+#: task_manager/templates/users/index.html:31
 msgid "Delete"
 msgstr "Удалить"
 
@@ -101,13 +117,27 @@ msgstr "Для подтверждения введите, пожалуйста, 
 msgid "Passwords don't match"
 msgstr "Пароли не совпадают"
 
-#: task_manager/users/views.py:22
+#: task_manager/users/views.py:23
 msgid "User is successfully registered"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: task_manager/users/views.py:25
+#: task_manager/users/views.py:26
 msgid "Sign up"
 msgstr "Зарегистрироваться"
+
+#: task_manager/users/views.py:35
+msgid "User is successfully updated"
+msgstr "Пользователь успешно изменен"
+
+#: task_manager/users/views.py:37
+#, fuzzy
+#| msgid "Update"
+msgid "Update user"
+msgstr "Изменить"
+
+#: task_manager/users/views.py:44
+msgid "You don't have permissions to modify another user."
+msgstr "У вас нет прав для изменения другого пользователя."
 
 #: task_manager/views.py:16
 msgid "You are logged in"
@@ -125,8 +155,8 @@ msgstr "Войти"
 msgid "You are logged out"
 msgstr "Вы разлогинены"
 
-#~ msgid "User is successfully updated"
-#~ msgstr "Пользователь успешно изменен"
+#~ msgid "You can't update other users"
+#~ msgstr "У вас нет прав для изменения другого пользователя."
 
 #~ msgid "Edit user"
 #~ msgstr "Изменение пользователя"

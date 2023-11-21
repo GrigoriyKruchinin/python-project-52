@@ -33,6 +33,7 @@ class UpdateUserForm(UserChangeForm):
         ),
         help_text=_('To confirm, please enter your password again.'),
     )
+
     class Meta(UserChangeForm.Meta):
         model = User
         fields = (
