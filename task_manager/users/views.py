@@ -9,12 +9,23 @@ from .mixins import UserPermissionMixin
 
 
 class UsersListView(ListView):
+    """
+    View to display a list of users.
+
+    Uses the 'users/index.html' template to render the user list.
+    """
     template_name = 'users/index.html'
     model = User
     context_object_name = 'users'
 
 
 class UserCreateView(CreateView, SuccessMessageMixin):
+    """
+    View to handle user registration.
+
+    Renders the 'form.html' template with the RegisterUserForm.
+    Redirects to 'login' upon successful registration with a success message.
+    """
     template_name = 'form.html'
     model = User
     form_class = RegisterUserForm
@@ -27,18 +38,32 @@ class UserCreateView(CreateView, SuccessMessageMixin):
 
 
 class UserUpdateView(UserPermissionMixin, SuccessMessageMixin, UpdateView):
+    """
+    View to update user information.
+
+    Requires user authentication and permissions through UserPermissionMixin.
+    Renders the 'form.html' template with the UpdateUserForm.
+    Redirects to 'users' upon successful update with a success message.
+    """
     template_name = 'form.html'
     model = User
     form_class = UpdateUserForm
     success_url = reverse_lazy('users')
     success_message = _('User is successfully updated')
     extra_context = {
-        'title': _('Update user'),
+        'header': _('Update user'),
         'button_text': _('Update'),
     }
 
 
 class UserDeleteView(UserPermissionMixin, DeleteView, SuccessMessageMixin):
+    """
+    View to delete a user.
+
+    Requires user authentication and permissions through UserPermissionMixin.
+    Renders the 'form.html' template with a deletion confirmation message.
+    Redirects to 'users' upon successful deletion with a success message.
+    """
     template_name = 'form.html'
     model = User
     success_url = reverse_lazy('users')
