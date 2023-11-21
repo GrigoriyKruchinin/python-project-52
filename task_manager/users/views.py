@@ -1,13 +1,11 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
-from django.shortcuts import redirect
-from django.contrib import messages
 
 from task_manager.users.models import User
 from .forms import RegisterUserForm, UpdateUserForm
+from .mixins import UserPermissionMixin
 
 
 class UsersListView(ListView):
@@ -28,7 +26,7 @@ class UserCreateView(CreateView, SuccessMessageMixin):
     }
 
 
-class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class UserUpdateView(UserPermissionMixin, SuccessMessageMixin, UpdateView):
     template_name = 'form.html'
     model = User
     form_class = UpdateUserForm
@@ -39,14 +37,6 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         'button_text': _('Update'),
     }
 
-    def dispatch(self, request, *args, **kwargs):
-        if self.get_object().id == request.user.id:
-            return super().dispatch(request, *args, **kwargs)
-        messages.error(
-            request, _("You don't have permissions to modify another user.")
-        )
-        return redirect('users')
 
-
-class UserDeleteView(DeleteView, SuccessMessageMixin):
+class UserDeleteView(UserPermissionMixin, DeleteView, SuccessMessageMixin):
     pass
