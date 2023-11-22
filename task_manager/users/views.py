@@ -11,8 +11,6 @@ from .mixins import UserPermissionMixin
 class UsersListView(ListView):
     """
     View to display a list of users.
-
-    Uses the 'users/index.html' template to render the user list.
     """
     template_name = 'users/index.html'
     model = User
@@ -22,9 +20,6 @@ class UsersListView(ListView):
 class UserCreateView(CreateView, SuccessMessageMixin):
     """
     View to handle user registration.
-
-    Renders the 'form.html' template with the RegisterUserForm.
-    Redirects to 'login' upon successful registration with a success message.
     """
     template_name = 'form.html'
     model = User
@@ -40,10 +35,6 @@ class UserCreateView(CreateView, SuccessMessageMixin):
 class UserUpdateView(UserPermissionMixin, SuccessMessageMixin, UpdateView):
     """
     View to update user information.
-
-    Requires user authentication and permissions through UserPermissionMixin.
-    Renders the 'form.html' template with the UpdateUserForm.
-    Redirects to 'users' upon successful update with a success message.
     """
     template_name = 'form.html'
     model = User
@@ -59,10 +50,6 @@ class UserUpdateView(UserPermissionMixin, SuccessMessageMixin, UpdateView):
 class UserDeleteView(UserPermissionMixin, DeleteView, SuccessMessageMixin):
     """
     View to delete a user.
-
-    Requires user authentication and permissions through UserPermissionMixin.
-    Renders the 'form.html' template with a deletion confirmation message.
-    Redirects to 'users' upon successful deletion with a success message.
     """
     template_name = 'form.html'
     model = User
