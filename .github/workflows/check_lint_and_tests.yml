@@ -21,7 +21,7 @@ jobs:
           pip install poetry
           make install
           pip install coverage
-      - name: Run linter and pytest
+      - name: Run linter and tests
         run: |
           make check
       - name: Create reporter
@@ -31,7 +31,7 @@ jobs:
           ./cc-test-reporter before-build
       - name: Test and Report coverage
         run: |
-          poetry run coverage run -m pytest
+          make test-cov
           poetry run coverage lcov -o coverage/lcov.info
       - name: Sending Reporter
         env:
