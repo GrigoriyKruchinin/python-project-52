@@ -6,6 +6,12 @@ __pycache__/
 # data for db on render.com
 psql_render.txt
 
+# Coverage
+coverage/
+.coverage
+test-coverage-tool
+htmlcov/
+
 # bootsrap tamplates
 bs5/
 
