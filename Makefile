@@ -57,16 +57,12 @@ loc_comp:
 	python manage.py compilemessages
 
 lint:
-	poetry run flake8 .
+	poetry run flake8 task_manager
 
 test:
 	poetry run python3 manage.py test
 
-check:
-	poetry run flake8 .
-	poetry run python3 manage.py test
-
-test-cov:
+test-coverage:
 	poetry run coverage run manage.py test
 	poetry run coverage report -m --include=task_manager/* --omit=task_manager/settings.py
 	poetry run coverage xml --include=task_manager/* --omit=task_manager/settings.py
