@@ -29,6 +29,7 @@ jobs:
       - name: Test and Report coverage
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DATABASE_URL: "sqlite:///:memory:"
         run: |
           make test-coverage
           poetry run coverage lcov -o coverage/lcov.info
