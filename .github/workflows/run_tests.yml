@@ -21,17 +21,20 @@ jobs:
           pip install poetry
           make install
 
-      - name: Run tests
+      - name: Create reporter
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
+      - name: Test and Report coverage
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: |
-          make test
-
-      - name: Run code coverage
-        uses: paambaati/codeclimate-action@v3.2.0
+          make test-coverage
+          poetry run coverage lcov -o coverage/lcov.info
+      - name: Sending Reporter
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.COVERAGE }}
+          GITHUB_TOKEN: ${{ secrets.Coverage }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        with:
-          coverageCommand: make test-coverage
-          debug: true
+        run: |
+          ./cc-test-reporter after-build -r "$GITHUB_TOKEN" -t lcov

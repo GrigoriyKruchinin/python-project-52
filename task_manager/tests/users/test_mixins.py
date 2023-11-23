@@ -23,7 +23,10 @@ class UserPermissionMixinTest(TestCase):
         messages = list(get_messages(response.wsgi_request))
 
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), _("You are not logged in! Please log in."))
+        self.assertEqual(
+            str(messages[0]),
+            _("You are not logged in! Please log in.")
+        )
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('login'))
 
@@ -34,7 +37,10 @@ class UserPermissionMixinTest(TestCase):
         messages = list(get_messages(response.wsgi_request))
 
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), _("You don't have permissions to modify another user."))
+        self.assertEqual(
+            str(messages[0]),
+            _("You don't have permissions to modify another user.")
+        )
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('users'))
 
