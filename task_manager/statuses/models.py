@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 # Create your models here.
 class Status(models.Model):
     name = models.CharField(
-        max_length=100,
+        max_length=200,
         verbose_name=_("Name"),
         unique=True
     )
@@ -17,7 +17,3 @@ class Status(models.Model):
     def __str__(self):
         return self.name
 
-    class Meta:
-        verbose_name = _("Status")
-        verbose_name_plural = _("Statuses")
-        ordering = ['created_at', 'name']
