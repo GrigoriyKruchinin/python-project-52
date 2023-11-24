@@ -7,16 +7,10 @@ from django.contrib import messages
 
 
 class IndexView(TemplateView):
-    """
-    View to display the home page.
-    """
     template_name = 'index.html'
 
 
 class UserLoginView(SuccessMessageMixin, LoginView):
-    """
-    View to handle user login.
-    """
     template_name = 'form.html'
     next_page = reverse_lazy('home')
     success_message = _('You are logged in')
@@ -27,9 +21,6 @@ class UserLoginView(SuccessMessageMixin, LoginView):
 
 
 class UserLogoutView(LogoutView):
-    """
-    View to handle user logout.
-    """
     next_page = reverse_lazy('home')
 
     def dispatch(self, request, *args, **kwargs):

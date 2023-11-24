@@ -9,18 +9,12 @@ from .mixins import UserPermissionMixin
 
 
 class UsersListView(ListView):
-    """
-    View to display a list of users.
-    """
     template_name = 'users/index.html'
     model = User
     context_object_name = 'users'
 
 
 class UserCreateView(CreateView, SuccessMessageMixin):
-    """
-    View to handle user registration.
-    """
     template_name = 'form.html'
     model = User
     form_class = RegisterUserForm
@@ -33,9 +27,6 @@ class UserCreateView(CreateView, SuccessMessageMixin):
 
 
 class UserUpdateView(UserPermissionMixin, SuccessMessageMixin, UpdateView):
-    """
-    View to update user information.
-    """
     template_name = 'form.html'
     model = User
     form_class = UpdateUserForm
@@ -48,9 +39,6 @@ class UserUpdateView(UserPermissionMixin, SuccessMessageMixin, UpdateView):
 
 
 class UserDeleteView(UserPermissionMixin, DeleteView, SuccessMessageMixin):
-    """
-    View to delete a user.
-    """
     template_name = 'form.html'
     model = User
     success_url = reverse_lazy('users')
