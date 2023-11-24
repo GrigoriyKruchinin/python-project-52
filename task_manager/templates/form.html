@@ -11,15 +11,15 @@
 
                 <h1 class="text-center mb-4">{{ header }}</h1>
 
-                {% if deletion_question %}
-                    <p>{{ deletion_question }} {{ user.get_full_name }}?</p>
+                {% if object %}
+                    <p>{% trans "Are you sure you want to remove" %} {{ object }}?</p>
                 {% endif %}
 
                 <form method="post">
                     {% csrf_token %}
                     {% bootstrap_form form %}
                     
-                    {% if deletion_question %}
+                    {% if object %}
                         {% bootstrap_button button_text button_type="submit" button_class="btn btn-danger" %}
                     {% else %}
                         {% bootstrap_button button_text button_type="submit" button_class="btn btn-primary" %}

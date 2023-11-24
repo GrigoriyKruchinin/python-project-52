@@ -4,17 +4,16 @@ from task_manager.statuses.models import Status
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
 from .forms import StatusForm
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
-from django.contrib import messages
+from task_manager.mixins import LoginRequiredMixin
 
-class StatusesListView(ListView):
+
+class StatusesListView(LoginRequiredMixin, ListView):
     template_name = 'statuses/index.html'
     model = Status
     context_object_name = 'statuses'
 
 
-class StatusCreateView(CreateView, SuccessMessageMixin):
+class StatusCreateView(LoginRequiredMixin, CreateView, SuccessMessageMixin):
     template_name = 'form.html'
     model = Status
     form_class = StatusForm
@@ -26,7 +25,7 @@ class StatusCreateView(CreateView, SuccessMessageMixin):
     }
 
 
-class StatusUpdateView(UpdateView, SuccessMessageMixin, LoginRequiredMixin):
+class StatusUpdateView(LoginRequiredMixin, UpdateView, SuccessMessageMixin):
     template_name = 'form.html'
     model = Status
     form_class = StatusForm
@@ -36,14 +35,20 @@ class StatusUpdateView(UpdateView, SuccessMessageMixin, LoginRequiredMixin):
         'header': _('Update user'),
         'button_text': _('Update'),
     }
-    
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            message = _("You are not logged in! Please log in.")
-            messages.error(request, message)
-            return redirect('login')
-        return super().dispatch(request, *args, **kwargs)
 
 
-class StatusDeleteView(DeleteView, SuccessMessageMixin):
-    pass
+class StatusDeleteView(LoginRequiredMixin, DeleteView, SuccessMessageMixin):
+    template_name = 'form.html'
+    model = Status
+    success_url = reverse_lazy('statuses')
+    success_message = _('Status successfully deleted')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object'] = self.get_object().name
+        return context
+
+    extra_context = {
+        'header': _('Delete status'),
+        'button_text': _('Yes, delete'),
+    }

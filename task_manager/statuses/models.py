@@ -13,7 +13,3 @@ class Status(models.Model):
         auto_now_add=True,
         verbose_name=_("Date of Creation")
     )
-
-    def __str__(self):
-        return self.name
-

@@ -26,7 +26,9 @@ class UserCreateView(CreateView, SuccessMessageMixin):
     }
 
 
-class UserUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
+class UserUpdateView(
+        LoginRequiredMixin, PermissionRequiredMixin,
+        SuccessMessageMixin, UpdateView):
     template_name = 'form.html'
     model = User
     form_class = UpdateUserForm
@@ -38,13 +40,20 @@ class UserUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SuccessMessage
     }
 
 
-class UserDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView, SuccessMessageMixin):
+class UserDeleteView(
+        LoginRequiredMixin, PermissionRequiredMixin,
+        DeleteView, SuccessMessageMixin):
     template_name = 'form.html'
     model = User
     success_url = reverse_lazy('users')
     success_message = _('User successfully deleted')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object'] = self.get_object().get_full_name()
+        return context
+
     extra_context = {
         'header': _('Delete user'),
-        'deletion_question': _('Are you sure you want to remove'),
         'button_text': _('Yes, delete'),
     }

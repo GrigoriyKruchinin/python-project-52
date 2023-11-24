@@ -5,10 +5,6 @@ from django.utils.translation import gettext_lazy as _
 
 
 class LoginRequiredMixin(LoginRequiredMixin):
-    """
-    Mixin for views requiring user authentication.
-    Redirects to login if not authenticated.
-    """
     login_url = 'login'
 
     def dispatch(self, request, *args, **kwargs):
@@ -21,10 +17,6 @@ class LoginRequiredMixin(LoginRequiredMixin):
 
 
 class PermissionRequiredMixin:
-    """
-    Mixin for views requiring permission to modify an object.
-    Redirects to the appropriate URL with an error message if permission is not granted.
-    """
     def dispatch(self, request, *args, **kwargs):
         if self.get_object().id != request.user.id:
             message = _("You don't have permissions to modify another user.")
