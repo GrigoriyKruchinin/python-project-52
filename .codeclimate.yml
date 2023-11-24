@@ -1,11 +1,13 @@
 exclude_patterns:
   - "**/*"  # Исключает все файлы из анализа по умолчанию
   - "!task_manager/**/*.py"  # Включает файлы Python из папки task_manager
-  - "!task_manager/tests/**/*"          # Исключает все файлы из папки tests
+  - "!task_manager/tests/**/*"  # Исключает все файлы из папки tests
+  - "**/urls.py"  # Исключает все файлы с именем urls.py
 
 plugins:
   codeclimate/codeclimate-py:
     enabled: true
     exclude_patterns:
       - "!"  # Включает файлы Python из папки task_manager для проверки метрик Python
-      - "task_manager/tests/**/*"          # Исключает все файлы из папки tests
+      - "task_manager/tests/**/*"  # Исключает все файлы из папки tests
+      - "**/urls.py"  # Исключает все файлы с именем urls.py
