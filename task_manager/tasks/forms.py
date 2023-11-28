@@ -17,22 +17,3 @@ class CreateTaskForm(forms.ModelForm):
         widgets = {
             'description': forms.Textarea(attrs={'cols': 0, 'rows': 0}),
         }
-
-
-class TaskFilterForm(forms.Form):
-    status = forms.ModelChoiceField(
-        queryset=Status.objects.all(),
-        required=False,
-        label=_("Statuses")
-    )
-    executor = forms.ModelChoiceField(
-        queryset=User.objects.all(),
-        required=False,
-        label=_("Creator")
-    )
-    self_tasks = forms.BooleanField(
-        required=False,
-        initial=False,
-        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
-        label=_("Only yourself tasks")
-    )
