@@ -32,7 +32,7 @@ class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 
-class DetailTaskView(DetailView):
+class DetailTaskView(LoginRequiredMixin, DetailView):
     template_name = 'tasks/task_detail.html'
     model = Task
 
