@@ -6,8 +6,8 @@ from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
 
 from task_manager.tasks.models import Task
-from .forms import CreateTaskForm
-from task_manager.mixins import LoginRequiredMixin
+from .forms import TaskForm
+from task_manager.mixins import LoginRequiredMixin, PermitDeleteTaskMixin
 
 
 class TasksListView(LoginRequiredMixin, ListView):
@@ -19,7 +19,7 @@ class TasksListView(LoginRequiredMixin, ListView):
 class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = 'form.html'
     model = Task
-    form_class = CreateTaskForm
+    form_class = TaskForm
     success_url = reverse_lazy('tasks')
     success_message = _('Task is successfully created')
     extra_context = {
@@ -32,14 +32,37 @@ class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 
-class DetailTaskView(LoginRequiredMixin, DetailView):
+class DetailTaskView(LoginRequiredMixin, SuccessMessageMixin, DetailView):
     template_name = 'tasks/task_detail.html'
     model = Task
 
 
-class TaskUpdateView(UpdateView):
-    pass
+class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    template_name = 'form.html'
+    model = Task
+    form_class = TaskForm
+    success_url = reverse_lazy('tasks')
+    success_message = _('Task is successfully updated')
+    extra_context = {
+        'header': _('Update Task'),
+        'button_text': _('Update'),
+    }
 
 
-class TaskDeleteView(DeleteView):
-    pass
+class TaskDeleteView(
+        LoginRequiredMixin, PermitDeleteTaskMixin,
+        SuccessMessageMixin, DeleteView):
+    template_name = 'form.html'
+    model = Task
+    success_url = reverse_lazy('tasks')
+    success_message = _('Task successfully deleted')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object'] = self.get_object().name
+        return context
+
+    extra_context = {
+        'header': _('Delete task'),
+        'button_text': _('Yes, delete'),
+    }

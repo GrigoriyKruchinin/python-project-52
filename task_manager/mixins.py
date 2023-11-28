@@ -16,11 +16,21 @@ class LoginRequiredMixin(LoginRequiredMixin):
         return super().dispatch(request, *args, **kwargs)
 
 
-class PermissionRequiredMixin:
+class PermitDeleteUserMixin:
     def dispatch(self, request, *args, **kwargs):
         if self.get_object().id != request.user.id:
             message = _("You don't have permissions to modify another user.")
             messages.error(request, message)
             return redirect('users')
+
+        return super().dispatch(request, *args, **kwargs)
+
+
+class PermitDeleteTaskMixin:
+    def dispatch(self, request, *args, **kwargs):
+        if self.get_object().creator != request.user:
+            message = _("A task can only be deleted by its author.")
+            messages.error(request, message)
+            return redirect('tasks')
 
         return super().dispatch(request, *args, **kwargs)
