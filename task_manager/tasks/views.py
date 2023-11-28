@@ -33,7 +33,8 @@ class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 class DetailTaskView(DetailView):
-    pass
+    template_name = 'tasks/task_detail.html'
+    model = Task
 
 
 class TaskUpdateView(UpdateView):
