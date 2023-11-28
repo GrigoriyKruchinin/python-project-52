@@ -23,4 +23,5 @@ class User(AbstractUser):
     - get_short_name: Get the short name of the user
     - email_user: Send an email to the user
     """
-    pass
+    def __str__(self):
+        return self.get_full_name()

@@ -9,21 +9,23 @@ class Task(models.Model):
         max_length=100,
         verbose_name=_("Name"),
         unique=True,
-        blank=False
     )
     description = models.CharField(
         max_length=1000,
         verbose_name=_("Description"),
+        blank=True,
     )
     creator = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
         verbose_name=_("Creator"),
-        related_name="task_creator"
+        related_name="creator"
     )
     executor = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
+        null=True,
+        blank=True,
         verbose_name=_("Executor"),
         related_name="executor"
     )
@@ -31,10 +33,16 @@ class Task(models.Model):
         Status,
         on_delete=models.PROTECT,
         verbose_name=_("Status"),
-        related_name="tasks",
-        blank=False
+        related_name="status",
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name=_("Date of Creation")
     )
+    
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _("Task")
+        verbose_name_plural = _("Tasks")

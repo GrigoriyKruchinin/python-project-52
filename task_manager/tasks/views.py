@@ -7,23 +7,29 @@ from django.urls import reverse_lazy
 
 from task_manager.tasks.models import Task
 from .forms import CreateTaskForm
-# from task_manager.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from task_manager.mixins import LoginRequiredMixin
 
 
-class TasksListView(ListView):
-    pass
+class TasksListView(LoginRequiredMixin, ListView):
+    template_name = 'tasks/index.html'
+    model = Task
+    context_object_name = 'tasks'
 
 
-class TaskCreateView(CreateView, SuccessMessageMixin):
+class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = 'form.html'
     model = Task
     form_class = CreateTaskForm
     success_url = reverse_lazy('tasks')
-    success_message = _('Task is successfully registered')
+    success_message = _('Task is successfully created')
     extra_context = {
         'header': _('Create task'),
         'button_text': _('Create'),
     }
+
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        return super().form_valid(form)
 
 
 class DetailTaskView(DetailView):
