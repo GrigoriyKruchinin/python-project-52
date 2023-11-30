@@ -22,7 +22,7 @@ class TasksListView(LoginRequiredMixin, ListView):
         self.filterset = TaskFilter(
             self.request.GET,
             queryset=queryset,
-            user=self.request.user.id
+            user=self.request.user
         )
         return self.filterset.qs
 
