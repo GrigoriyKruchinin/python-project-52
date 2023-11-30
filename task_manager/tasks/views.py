@@ -2,18 +2,38 @@ from django.views.generic import (
     ListView, CreateView, UpdateView, DeleteView, DetailView
 )
 from django.contrib.messages.views import SuccessMessageMixin
+from task_manager.mixins import LoginRequiredMixin, PermitDeleteTaskMixin
+
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
 
 from task_manager.tasks.models import Task
 from .forms import TaskForm
-from task_manager.mixins import LoginRequiredMixin, PermitDeleteTaskMixin
+from .filters import TaskFilter
 
 
 class TasksListView(LoginRequiredMixin, ListView):
     template_name = 'tasks/index.html'
     model = Task
     context_object_name = 'tasks'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = TaskFilter(
+            self.request.GET,
+            queryset=queryset,
+            user=self.request.user.id
+        )
+        return self.filterset.qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.filterset.form
+        return context
+
+    extra_context = {
+        'button_text': _('Show'),
+    }
 
 
 class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
