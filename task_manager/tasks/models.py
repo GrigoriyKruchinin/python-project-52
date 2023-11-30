@@ -37,7 +37,7 @@ class Task(models.Model):
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
-        verbose_name=_("Date of Creation")
+        verbose_name=_("Date of creation")
     )
 
     def __str__(self):
