@@ -20,7 +20,7 @@ class TasksListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         self.filterset = TaskFilter(
-            self.request.GET,
+            data=self.request.GET if self.request.GET else None,
             queryset=queryset,
             user=self.request.user
         )
