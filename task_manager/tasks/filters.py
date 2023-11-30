@@ -6,9 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 class TaskFilter(django_filters.FilterSet):
     def show_own_task(self, queryset, arg, value):
-        if value:
-            return queryset.filter(creator=self.user)
-        return queryset
+        return queryset.filter(creator=self.user) if value else queryset
 
     own_tasks = django_filters.BooleanFilter(
         method='show_own_task',
