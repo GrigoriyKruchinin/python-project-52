@@ -64,7 +64,7 @@ class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_url = reverse_lazy('tasks')
     success_message = _('Task is successfully updated')
     extra_context = {
-        'header': _('Update Task'),
+        'header': _('Task update'),
         'button_text': _('Update'),
     }
 
@@ -72,7 +72,7 @@ class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 class TaskDeleteView(
         LoginRequiredMixin, PermitDeleteTaskMixin,
         SuccessMessageMixin, DeleteView):
-    template_name = 'form.html'
+    template_name = 'delete_form.html'
     model = Task
     success_url = reverse_lazy('tasks')
     success_message = _('Task successfully deleted')

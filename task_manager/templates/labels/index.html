@@ -26,12 +26,11 @@
         <tr>
             <td>{{ label.id }}</td>
             <td>{{ label.name }}</td>
-            <td>{{ label.status }}</td>
             <td>{{ label.created_at }}</td>
             <td>
-                <a href="{% url 'label_update' pk=task.id %}">{% trans "Update" %}</a>
+                <a href="{% url 'label_update' pk=label.id %}">{% trans "Update" %}</a>
                 <br>
-                <a href="{% url 'label_delete' pk=task.id %}">{% trans "Delete" %}</a>
+                <a href="{% url 'label_delete' pk=label.id %}">{% trans "Delete" %}</a>
             </td>
         </tr>
     {% endfor %}
