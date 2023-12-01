@@ -41,8 +41,8 @@ class Task(models.Model):
         Label,
         through='TasksRelotionLabels',
         blank=True,
-        verbose_name=_("Label"),
-        related_name="label",
+        verbose_name=_("Labels"),
+        related_name="labels",
     )
     created_at = models.DateTimeField(
         auto_now_add=True,

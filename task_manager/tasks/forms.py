@@ -10,6 +10,7 @@ class TaskForm(forms.ModelForm):
             'description',
             'status',
             'executor',
+            'labels'
         ]
         widgets = {
             'description': forms.Textarea(attrs={'cols': 0, 'rows': 0}),
