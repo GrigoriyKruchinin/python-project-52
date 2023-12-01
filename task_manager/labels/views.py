@@ -1,4 +1,3 @@
-from typing import Any
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from task_manager.labels.models import Label
@@ -52,7 +51,7 @@ class LabelDeleteView(DeleteProtectionMixin, DeleteView, SuccessMessageMixin):
         context = super().get_context_data(**kwargs)
         context['object'] = self.get_object().name
         return context
-    
+
     extra_context = {
         'header': _("Delete label"),
         'button_text': _("Yes, delete")

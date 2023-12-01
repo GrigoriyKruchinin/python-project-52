@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 class LabelForm(forms.ModelForm):
     class Meta:
-        model=Label
+        model = Label
         fields = ('name',)
         labels = {
             'name': _('Name'),
