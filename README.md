@@ -67,6 +67,8 @@ make dev
 ## Демонстрация работы программы:
 Вы моежете пользоваться сервисом по этой [ссылке](https://task-manager-ytvh.onrender.com).
 
+Удачи!
+
 ***
 ## Контакты
 - Автор: Grigoriy Kruchinin
