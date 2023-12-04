@@ -7,14 +7,6 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/9e4054d13d4b4b33f6a8/maintainability)](https://codeclimate.com/github/GrigoriyKruchinin/python-project-52/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9e4054d13d4b4b33f6a8/test_coverage)](https://codeclimate.com/github/GrigoriyKruchinin/python-project-52/test_coverage)
 
-[Link on render](https://task-manager-ytvh.onrender.com)
-
-# Page Analyzer
-***
-![Hexlet Badge](https://img.shields.io/badge/Hexlet-116EF5?logo=hexlet&logoColor=fff&style=for-the-badge)
-[![Actions Status](https://github.com/GrigoriyKruchinin/python-project-83/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/GrigoriyKruchinin/python-project-83/actions)
-[![Check_my_Actions](https://github.com/GrigoriyKruchinin/python-project-83/actions/workflows/my_workflow.yml/badge.svg)](https://github.com/GrigoriyKruchinin/python-project-83/actions)
-[![Maintainability](https://api.codeclimate.com/v1/badges/243dd971a19c9d35615d/maintainability)](https://codeclimate.com/github/GrigoriyKruchinin/python-project-83/maintainability)
 
 __"Task manager__ - четвертый проект, разработанный в рамках обучения на курсе Хекслет. Это сайт, который позволяет распределять задачи среди пользователей и следить за их выполнением.
 
