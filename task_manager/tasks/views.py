@@ -2,7 +2,9 @@ from django.views.generic import (
     ListView, CreateView, UpdateView, DeleteView, DetailView
 )
 from django.contrib.messages.views import SuccessMessageMixin
-from task_manager.mixins import LoginRequiredMixin, PermitDeleteTaskMixin
+from task_manager.mixins import (
+    LoginRequiredMixin, PermitDeleteTaskMixin, StringRepresentationMixin
+)
 
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
@@ -71,17 +73,12 @@ class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 class TaskDeleteView(
         LoginRequiredMixin, PermitDeleteTaskMixin,
-        SuccessMessageMixin, DeleteView):
+        SuccessMessageMixin, StringRepresentationMixin,
+        DeleteView):
     template_name = 'delete_form.html'
     model = Task
     success_url = reverse_lazy('tasks')
     success_message = _('Task successfully deleted')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['object'] = self.get_object().name
-        return context
-
     extra_context = {
         'header': _('Delete task'),
         'button_text': _('Yes, delete'),

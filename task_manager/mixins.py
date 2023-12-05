@@ -47,3 +47,10 @@ class DeleteProtectionMixin:
         except ProtectedError:
             messages.error(request, self.protected_message)
             return redirect(self.protected_url)
+
+
+class StringRepresentationMixin:
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object'] = str(self.get_object())
+        return context

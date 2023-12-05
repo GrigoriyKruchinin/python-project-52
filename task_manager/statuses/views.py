@@ -4,7 +4,7 @@ from task_manager.statuses.models import Status
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
 from .forms import StatusForm
-from task_manager.mixins import LoginRequiredMixin
+from task_manager.mixins import LoginRequiredMixin, StringRepresentationMixin
 
 
 class StatusesListView(LoginRequiredMixin, ListView):
@@ -37,17 +37,13 @@ class StatusUpdateView(LoginRequiredMixin, UpdateView, SuccessMessageMixin):
     }
 
 
-class StatusDeleteView(LoginRequiredMixin, DeleteView, SuccessMessageMixin):
+class StatusDeleteView(
+        LoginRequiredMixin, StringRepresentationMixin,
+        DeleteView, SuccessMessageMixin):
     template_name = 'delete_form.html'
     model = Status
     success_url = reverse_lazy('statuses')
     success_message = _('Status successfully deleted')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['object'] = self.get_object().name
-        return context
-
     extra_context = {
         'header': _('Delete status'),
         'button_text': _('Yes, delete'),

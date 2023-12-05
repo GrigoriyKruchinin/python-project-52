@@ -3,7 +3,9 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from task_manager.labels.models import Label
 from task_manager.labels.forms import LabelForm
 
-from task_manager.mixins import LoginRequiredMixin, DeleteProtectionMixin
+from task_manager.mixins import (
+    LoginRequiredMixin, DeleteProtectionMixin, StringRepresentationMixin
+)
 
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
@@ -39,19 +41,15 @@ class LabelUpdateView(LoginRequiredMixin, UpdateView, SuccessMessageMixin):
     }
 
 
-class LabelDeleteView(DeleteProtectionMixin, DeleteView, SuccessMessageMixin):
+class LabelDeleteView(
+        DeleteProtectionMixin, StringRepresentationMixin,
+        DeleteView, SuccessMessageMixin):
     template_name = 'delete_form.html'
     model = Label
     success_message = _("Label is successfully deleted")
     success_url = reverse_lazy('labels')
     protected_message = _("Cannot delete a label because it is in use")
     protected_url = reverse_lazy('labels')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['object'] = self.get_object().name
-        return context
-
     extra_context = {
         'header': _("Delete label"),
         'button_text': _("Yes, delete")

@@ -5,7 +5,9 @@ from django.urls import reverse_lazy
 
 from task_manager.users.models import User
 from .forms import RegisterUserForm, UpdateUserForm
-from task_manager.mixins import LoginRequiredMixin, PermitDeleteUserMixin
+from task_manager.mixins import (
+    LoginRequiredMixin, PermitDeleteUserMixin, StringRepresentationMixin
+)
 
 
 class UsersListView(ListView):
@@ -42,17 +44,12 @@ class UserUpdateView(
 
 class UserDeleteView(
         LoginRequiredMixin, PermitDeleteUserMixin,
-        DeleteView, SuccessMessageMixin):
+        StringRepresentationMixin, DeleteView, 
+        SuccessMessageMixin):
     template_name = 'delete_form.html'
     model = User
     success_url = reverse_lazy('users')
     success_message = _('User successfully deleted')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['object'] = self.get_object().get_full_name()
-        return context
-
     extra_context = {
         'header': _('Delete user'),
         'button_text': _('Yes, delete'),
