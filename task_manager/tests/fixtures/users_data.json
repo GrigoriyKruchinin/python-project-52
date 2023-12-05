@@ -1,0 +1,12 @@
+[
+    {
+        "model": "users.User",
+        "pk": 1,
+        "fields": {
+            "first_name": "Piter",
+            "last_name": "Parker",
+            "username": "Spider_Man",
+            "date_joined": "2022-01-01T00:00:00Z"
+        }
+    }
+]
