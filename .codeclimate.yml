@@ -1,7 +1,7 @@
 exclude_patterns:
   - "**/*"  # Исключает все файлы из анализа по умолчанию
   - "!task_manager/**/*.py"  # Включает файлы Python из папки task_manager
-  - "!task_manager/tests/**/*"  # Исключает все файлы из папки tests
+  - "**/tests/**/*"  # Исключает все файлы из папки tests
   - "**/urls.py"  # Исключает все файлы с именем urls.py
   - "**/migrations/**/*"  # Исключает все файлы из папки migrations
 plugins:
@@ -9,6 +9,6 @@ plugins:
     enabled: true
     exclude_patterns:
       - "!"  # Включает файлы Python из папки task_manager для проверки метрик Python
-      - "task_manager/tests/**/*"  # Исключает все файлы из папки tests
+      - "**/tests/**/*"  # Исключает все файлы из папки tests
       - "**/urls.py"  # Исключает все файлы с именем urls.py
       - "**/migrations/**/*"  # Исключает все файлы из папки migrations
