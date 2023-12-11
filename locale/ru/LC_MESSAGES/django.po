@@ -292,7 +292,7 @@ msgstr "Полное имя"
 
 #: task_manager/tests/test_views.py:22 task_manager/views.py:27
 msgid "You are logged out"
-msgstr "Вы залогинены"
+msgstr "Вы разлогинены"
 
 #: task_manager/users/forms.py:23
 msgid "Password"
