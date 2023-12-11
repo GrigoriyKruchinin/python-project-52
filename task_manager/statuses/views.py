@@ -13,7 +13,7 @@ class StatusesListView(LoginRequiredMixin, ListView):
     context_object_name = 'statuses'
 
 
-class StatusCreateView(LoginRequiredMixin, CreateView):
+class StatusCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = 'form.html'
     model = Status
     form_class = StatusForm
