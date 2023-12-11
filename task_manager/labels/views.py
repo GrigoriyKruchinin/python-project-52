@@ -17,7 +17,7 @@ class LabelsListView(LoginRequiredMixin, ListView):
     context_object_name = 'labels'
 
 
-class LabelCreateView(LoginRequiredMixin, CreateView, SuccessMessageMixin):
+class LabelCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = 'form.html'
     model = Label
     form_class = LabelForm
@@ -29,7 +29,7 @@ class LabelCreateView(LoginRequiredMixin, CreateView, SuccessMessageMixin):
     }
 
 
-class LabelUpdateView(LoginRequiredMixin, UpdateView, SuccessMessageMixin):
+class LabelUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'form.html'
     model = Label
     form_class = LabelForm
@@ -43,7 +43,7 @@ class LabelUpdateView(LoginRequiredMixin, UpdateView, SuccessMessageMixin):
 
 class LabelDeleteView(
         DeleteProtectionMixin, StringRepresentationMixin,
-        DeleteView, SuccessMessageMixin):
+        SuccessMessageMixin, DeleteView):
     template_name = 'delete_form.html'
     model = Label
     success_message = _("Label is successfully deleted")

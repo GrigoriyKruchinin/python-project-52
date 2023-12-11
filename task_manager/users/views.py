@@ -16,7 +16,7 @@ class UsersListView(ListView):
     context_object_name = 'users'
 
 
-class UserCreateView(CreateView, SuccessMessageMixin):
+class UserCreateView(SuccessMessageMixin, CreateView):
     template_name = 'form.html'
     model = User
     form_class = RegisterUserForm
@@ -44,8 +44,8 @@ class UserUpdateView(
 
 class UserDeleteView(
         LoginRequiredMixin, PermitDeleteUserMixin,
-        StringRepresentationMixin, DeleteView,
-        SuccessMessageMixin):
+        StringRepresentationMixin, SuccessMessageMixin,
+        DeleteView):
     template_name = 'delete_form.html'
     model = User
     success_url = reverse_lazy('users')
