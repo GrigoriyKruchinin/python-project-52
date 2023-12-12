@@ -3,9 +3,9 @@ from django.views.generic import (
 )
 from django.contrib.messages.views import SuccessMessageMixin
 from task_manager.mixins import (
-    LoginRequiredMixin, PermitDeleteTaskMixin, StringRepresentationMixin
+    LoginRequiredMixin, StringRepresentationMixin
 )
-
+from .mixins import PermitDeleteTaskMixin
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
 

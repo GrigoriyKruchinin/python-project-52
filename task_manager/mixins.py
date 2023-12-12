@@ -10,13 +10,12 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 class LoginRequiredMixin(LoginRequiredMixin):
     login_url = reverse_lazy('login')
 
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
+    def handle_no_permission(self):
+        if not self.request.user.is_authenticated:
             message = _("You are not logged in! Please log in.")
-            messages.error(request, message)
+            messages.error(self.request, message)
             return redirect(self.login_url)
-
-        return super().dispatch(request, *args, **kwargs)
+        return super().handle_no_permission()
 
 
 class PermitDeleteUserMixin(UserPassesTestMixin):
@@ -27,16 +26,6 @@ class PermitDeleteUserMixin(UserPassesTestMixin):
         message = _("You don't have permissions to modify another user.")
         messages.error(self.request, message)
         return redirect(reverse_lazy('users'))
-
-
-class PermitDeleteTaskMixin:
-    def dispatch(self, request, *args, **kwargs):
-        if self.get_object().creator != request.user:
-            message = _("A task can only be deleted by its author.")
-            messages.error(request, message)
-            return redirect('tasks')
-
-        return super().dispatch(request, *args, **kwargs)
 
 
 class DeleteProtectionMixin:
