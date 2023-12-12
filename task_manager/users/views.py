@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from task_manager.users.models import User
 from .forms import RegisterUserForm, UpdateUserForm
 from task_manager.mixins import (
-    LoginRequiredMixin, PermitDeleteUserMixin, StringRepresentationMixin
+    LoginRequiredMixin, PermitDeleteUserMixin, ObjectContextMixin
 )
 
 
@@ -44,7 +44,7 @@ class UserUpdateView(
 
 class UserDeleteView(
         LoginRequiredMixin, PermitDeleteUserMixin,
-        StringRepresentationMixin, SuccessMessageMixin,
+        ObjectContextMixin, SuccessMessageMixin,
         DeleteView):
     template_name = 'delete_form.html'
     model = User

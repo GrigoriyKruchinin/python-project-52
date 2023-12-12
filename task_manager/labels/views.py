@@ -4,7 +4,7 @@ from task_manager.labels.models import Label
 from task_manager.labels.forms import LabelForm
 
 from task_manager.mixins import (
-    LoginRequiredMixin, DeleteProtectionMixin, StringRepresentationMixin
+    LoginRequiredMixin, DeleteProtectionMixin, ObjectContextMixin
 )
 
 from django.utils.translation import gettext_lazy as _
@@ -42,7 +42,7 @@ class LabelUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 
 class LabelDeleteView(
-        DeleteProtectionMixin, StringRepresentationMixin,
+        DeleteProtectionMixin, ObjectContextMixin,
         SuccessMessageMixin, DeleteView):
     template_name = 'delete_form.html'
     model = Label

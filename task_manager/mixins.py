@@ -40,8 +40,8 @@ class DeleteProtectionMixin:
             return redirect(self.protected_url)
 
 
-class StringRepresentationMixin:
+class ObjectContextMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['object'] = str(self.get_object())
+        context['object'] = self.get_object()
         return context
