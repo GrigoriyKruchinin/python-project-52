@@ -3,10 +3,11 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
 from django.db.models import ProtectedError
+from django.urls import reverse_lazy
 
 
 class LoginRequiredMixin(LoginRequiredMixin):
-    login_url = 'login'
+    login_url = reverse_lazy('login')
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -22,7 +23,7 @@ class PermitDeleteUserMixin:
         if self.get_object().id != request.user.id:
             message = _("You don't have permissions to modify another user.")
             messages.error(request, message)
-            return redirect('users')
+            return redirect(reverse_lazy('users'))
 
         return super().dispatch(request, *args, **kwargs)
 
