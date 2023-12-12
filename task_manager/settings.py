@@ -151,23 +151,11 @@ LOCALE_PATHS = [BASE_DIR / 'locale']
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-# Static files settings
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
-# Paths where Django will look for static files
-STATICFILES_DIRS = [BASE_DIR / "task_manager" / "static"]
+STATIC_ROOT = BASE_DIR / "static"
 
-# Path where static files will be collected during development
-STATIC_ROOT = BASE_DIR / "static_root" / "dev"
-
-# Production settings
-if not DEBUG:
-    # Path where static files will be collected for production
-    STATIC_ROOT = BASE_DIR / "static_root" / 'prod'
-
-    # Enable storage of static files in WhiteNoise,
-    # which handles compression and generates unique names for each version.
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Default primary key field type
