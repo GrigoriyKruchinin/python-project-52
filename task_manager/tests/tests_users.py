@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class CRUDforUser(TestCase):
-    fixtures = ["users.json"]
+    fixtures = ["statuses.json", "users.json", "tasks.json"]
 
     # Create
     def test_registration(self):
@@ -35,7 +35,7 @@ class CRUDforUser(TestCase):
         self.assertEqual(last_user.last_name, "Renolds")
         self.assertEqual(last_user.username, "Deadpool")
         self.assertEqual(str(last_user), "Rayan Renolds")
-        self.assertEqual(users_count, 3)
+        self.assertEqual(users_count, 4)
 
     # Read
     def test_users_list(self):
@@ -44,7 +44,8 @@ class CRUDforUser(TestCase):
         self.assertTemplateUsed(response, 'users/index.html')
         self.assertContains(response, 'Peter Parker')
         self.assertContains(response, 'Bruce Wayne')
-        self.assertEqual(len(response.context['users']), 2)
+        self.assertContains(response, 'Clark Kent')
+        self.assertEqual(len(response.context['users']), 3)
 
     # Update
     def test_update_user(self):
@@ -120,7 +121,18 @@ class CRUDforUser(TestCase):
             response, _("You are not logged in! Please log in.")
         )
 
-        self.client.force_login(get_user_model().objects.get(pk=1))
+        self.client.force_login(get_user_model().objects.get(pk=2))
+        response = self.client.post(
+            reverse('user_delete', kwargs={'pk': 2}),
+            follow=True
+        )
+        self.assertRedirects(response, reverse('users'))
+        self.assertContains(
+            response, _("Cannot delete a user because it is in use")
+        )
+        self.assertEqual(User.objects.count(), 3)
+
+        self.client.force_login(get_user_model().objects.get(pk=3))
 
         response = self.client.get(
             reverse('user_delete', kwargs={'pk': 2}),
@@ -132,21 +144,21 @@ class CRUDforUser(TestCase):
         )
 
         response = self.client.get(
-            reverse('user_delete', kwargs={'pk': 1}),
+            reverse('user_delete', kwargs={'pk': 3}),
             follow=True
         )
         self.assertTemplateUsed(response, 'delete_form.html')
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Peter Parker')
+        self.assertContains(response, 'Clark Kent')
 
         response = self.client.post(
-            reverse('user_delete', kwargs={'pk': 1}),
+            reverse('user_delete', kwargs={'pk': 3}),
             follow=True
         )
         self.assertRedirects(response, reverse('users'))
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(User.objects.count(), 1)
         self.assertContains(response, _('User successfully deleted'))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(User.objects.count(), 2)
 
     # Logout
     def test_logout(self):

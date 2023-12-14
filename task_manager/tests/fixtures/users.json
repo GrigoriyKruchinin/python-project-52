@@ -18,5 +18,15 @@
             "username": "Batman",
             "password": "456"
         }
+    },
+    {
+        "model": "users.user",
+        "pk": 3,
+        "fields": {
+            "first_name": "Clark",
+            "last_name": "Kent",
+            "username": "Superman",
+            "password": "789"
+        }
     }
 ]

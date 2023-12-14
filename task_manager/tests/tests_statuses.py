@@ -79,6 +79,7 @@ class CRUDforStatus(TestCase):
         self.assertContains(response, _('Status is successfully updated'))
         self.assertEqual(Status.objects.get(pk=1).name, "on hold")
 
+    # Delete
     def test_delete_status(self):
         response = self.client.get(
             reverse('status_delete', kwargs={"pk": 1}), follow=True

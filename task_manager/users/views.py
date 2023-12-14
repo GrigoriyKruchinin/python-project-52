@@ -45,7 +45,7 @@ class UserUpdateView(
 
 class UserDeleteView(
         LoginRequiredMixin, PermitDeleteUserMixin,
-        ObjectContextMixin, DeleteProtectionMixin,
+        DeleteProtectionMixin, ObjectContextMixin,
         SuccessMessageMixin, DeleteView):
     template_name = 'delete_form.html'
     model = User
