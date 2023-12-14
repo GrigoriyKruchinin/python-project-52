@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class CRUDforStatus(TestCase):
-    fixtures = ['statuses.json', 'users.json']
+    fixtures = ['statuses.json', 'users.json', 'tasks.json']
 
     # Create
     def test_create_status(self):
@@ -90,12 +90,22 @@ class CRUDforStatus(TestCase):
         )
 
         self.client.force_login(get_user_model().objects.get(pk=1))
+
         response = self.client.get(
             reverse('status_delete', kwargs={"pk": 2}), follow=True
         )
         self.assertTemplateUsed(response, 'delete_form.html')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "finished")
+
+        response = self.client.post(
+            reverse('status_delete', kwargs={"pk": 1}), follow=True
+        )
+        self.assertRedirects(response, reverse('statuses'))
+        self.assertContains(
+            response, _("Cannot delete a status because it is in use")
+        )
+        self.assertEqual(Status.objects.count(), 2)
 
         response = self.client.post(
             reverse('status_delete', kwargs={"pk": 2}), follow=True
