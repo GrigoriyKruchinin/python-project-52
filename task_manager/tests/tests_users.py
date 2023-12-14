@@ -147,7 +147,7 @@ class CRUDforUser(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(User.objects.count(), 1)
         self.assertContains(response, _('User successfully deleted'))
-        
+
     # Logout
     def test_logout(self):
         self.client.force_login(get_user_model().objects.get(pk=1))
@@ -156,4 +156,3 @@ class CRUDforUser(TestCase):
         self.assertContains(
             response, _('You are logged out')
         )
-

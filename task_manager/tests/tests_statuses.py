@@ -95,7 +95,7 @@ class CRUDforStatus(TestCase):
         self.assertTemplateUsed(response, 'delete_form.html')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "finished")
-        
+
         response = self.client.post(
             reverse('status_delete', kwargs={"pk": 2}), follow=True
         )
