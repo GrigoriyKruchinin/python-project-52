@@ -3,7 +3,7 @@
         "model": "users.user",
         "pk": 1,
         "fields": {
-            "first_name": "Piter",
+            "first_name": "Peter",
             "last_name": "Parker",
             "username": "Spider_man",
             "password": "123"
@@ -13,8 +13,8 @@
         "model": "users.user",
         "pk": 2,
         "fields": {
-            "first_name": "Brus",
-            "last_name": "Wane",
+            "first_name": "Bruce",
+            "last_name": "Wayne",
             "username": "Batman",
             "password": "456"
         }

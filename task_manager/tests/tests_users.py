@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class CRUDforUser(TestCase):
-    fixtures = ["dump_data.json"]
+    fixtures = ["users.json"]
 
     # Create
     def test_registration(self):
@@ -30,22 +30,20 @@ class CRUDforUser(TestCase):
         self.assertContains(response, _('User is successfully registered'))
 
         last_user = User.objects.last()
+        users_count = User.objects.count()
         self.assertEqual(last_user.first_name, "Rayan")
         self.assertEqual(last_user.last_name, "Renolds")
         self.assertEqual(last_user.username, "Deadpool")
         self.assertEqual(str(last_user), "Rayan Renolds")
-
-        # Test for UsersListView with new user
-        response = self.client.get(reverse('users'))
-        self.assertEqual(len(response.context['users']), 3)
+        self.assertEqual(users_count, 3)
 
     # Read
     def test_users_list(self):
         response = self.client.get(reverse('users'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'users/index.html')
-        self.assertContains(response, 'Piter Parker')
-        self.assertContains(response, 'Brus Wane')
+        self.assertContains(response, 'Peter Parker')
+        self.assertContains(response, 'Bruce Wayne')
         self.assertEqual(len(response.context['users']), 2)
 
     # Update
@@ -109,6 +107,7 @@ class CRUDforUser(TestCase):
         self.assertRedirects(response, reverse('users'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, _('User is successfully updated'))
+        self.assertEqual(User.objects.get(pk=1).username, "New_Spider_Man")
 
     # Delete
     def test_user_delete(self):
@@ -138,7 +137,7 @@ class CRUDforUser(TestCase):
         )
         self.assertTemplateUsed(response, 'delete_form.html')
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Piter Parker')
+        self.assertContains(response, 'Peter Parker')
 
         response = self.client.post(
             reverse('user_delete', kwargs={'pk': 1}),
@@ -147,3 +146,14 @@ class CRUDforUser(TestCase):
         self.assertRedirects(response, reverse('users'))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(User.objects.count(), 1)
+        self.assertContains(response, _('User successfully deleted'))
+        
+    # Logout
+    def test_logout(self):
+        self.client.force_login(get_user_model().objects.get(pk=1))
+        response = self.client.post(reverse('logout'), follow=True)
+        self.assertRedirects(response, reverse('home'))
+        self.assertContains(
+            response, _('You are logged out')
+        )
+
