@@ -1,0 +1,22 @@
+[
+    {
+        "model": "users.user",
+        "pk": 1,
+        "fields": {
+            "first_name": "Piter",
+            "last_name": "Parker",
+            "username": "Spider_man",
+            "password": "123"
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 2,
+        "fields": {
+            "first_name": "Brus",
+            "last_name": "Wane",
+            "username": "Batman",
+            "password": "456"
+        }
+    }
+]

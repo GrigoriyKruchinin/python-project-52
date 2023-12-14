@@ -6,20 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class CRUDforUser(TestCase):
-    def setUp(self):
-        self.client = Client()
-        self.user1 = get_user_model().objects.create(
-            first_name="Piter",
-            last_name="Parker",
-            username="Spider_man",
-            password="123"
-        )
-        self.user2 = get_user_model().objects.create(
-            first_name="Brus",
-            last_name="Wane",
-            username="Batman",
-            password="456"
-        )
+    fixtures = ["dump_data.json"]
 
     # Create
     def test_registration(self):
@@ -64,7 +51,7 @@ class CRUDforUser(TestCase):
     # Update
     def test_update_user(self):
         response = self.client.get(
-            reverse('user_update', kwargs={'pk': self.user2.pk}),
+            reverse('user_update', kwargs={'pk': 2}),
             follow=True
         )
         self.assertRedirects(response, reverse('login'))
@@ -72,10 +59,10 @@ class CRUDforUser(TestCase):
             response, _("You are not logged in! Please log in.")
         )
 
-        self.client.force_login(self.user1)
+        self.client.force_login(get_user_model().objects.get(pk=1))
 
         response = self.client.get(
-            reverse('user_update', kwargs={'pk': self.user2.pk}),
+            reverse('user_update', kwargs={'pk': 2}),
             follow=True
         )
         self.assertRedirects(response, reverse('users'))
@@ -84,14 +71,14 @@ class CRUDforUser(TestCase):
         )
 
         response = self.client.get(
-            reverse('user_update', kwargs={'pk': self.user1.pk}),
+            reverse('user_update', kwargs={'pk': 1}),
             follow=True
         )
         self.assertTemplateUsed(response, 'form.html')
         self.assertEqual(response.status_code, 200)
 
         response = self.client.post(
-            reverse('user_update', kwargs={'pk': self.user1.pk}),
+            reverse('user_update', kwargs={'pk': 1}),
             data={
                 'first_name': "Miles",
                 'last_name': "Morales",
@@ -109,7 +96,7 @@ class CRUDforUser(TestCase):
         )
 
         response = self.client.post(
-            reverse('user_update', kwargs={'pk': self.user1.pk}),
+            reverse('user_update', kwargs={'pk': 1}),
             data={
                 'first_name': "Miles",
                 'last_name': "Morales",
@@ -126,7 +113,7 @@ class CRUDforUser(TestCase):
     # Delete
     def test_user_delete(self):
         response = self.client.get(
-            reverse('user_delete', kwargs={'pk': self.user2.pk}),
+            reverse('user_delete', kwargs={'pk': 2}),
             follow=True
         )
         self.assertRedirects(response, reverse('login'))
@@ -134,10 +121,10 @@ class CRUDforUser(TestCase):
             response, _("You are not logged in! Please log in.")
         )
 
-        self.client.force_login(self.user1)
+        self.client.force_login(get_user_model().objects.get(pk=1))
 
         response = self.client.get(
-            reverse('user_delete', kwargs={'pk': self.user2.pk}),
+            reverse('user_delete', kwargs={'pk': 2}),
             follow=True
         )
         self.assertRedirects(response, reverse('users'))
@@ -146,7 +133,7 @@ class CRUDforUser(TestCase):
         )
 
         response = self.client.get(
-            reverse('user_delete', kwargs={'pk': self.user1.pk}),
+            reverse('user_delete', kwargs={'pk': 1}),
             follow=True
         )
         self.assertTemplateUsed(response, 'delete_form.html')
@@ -154,7 +141,7 @@ class CRUDforUser(TestCase):
         self.assertContains(response, 'Piter Parker')
 
         response = self.client.post(
-            reverse('user_delete', kwargs={'pk': self.user1.pk}),
+            reverse('user_delete', kwargs={'pk': 1}),
             follow=True
         )
         self.assertRedirects(response, reverse('users'))
