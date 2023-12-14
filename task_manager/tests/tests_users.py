@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class CRUDforUser(TestCase):
-    fixtures = ["statuses.json", "users.json", "tasks.json"]
+    fixtures = ['tasks.json', 'users.json', 'statuses.json', 'labels.json']
 
     # Create
     def test_registration(self):
