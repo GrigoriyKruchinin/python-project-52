@@ -57,6 +57,37 @@ class CRUDforTasks(TestCase):
         self.assertEqual(len(response.context['tasks']), 2)
         self.assertContains(response, "Task 1")
         self.assertContains(response, "Task 2")
+        
+        response = self.client.get(
+            reverse('tasks'), {'own_tasks': True}, follow=True
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'tasks/index.html')
+        self.assertEqual(len(response.context['tasks']), 1)
+        self.assertContains(response, "Task 1")
+        self.assertNotContains(response, "Task 2")
+    
+    def test_task_detail(self):
+        response = self.client.get(
+            reverse('task_detail', kwargs={"pk": 1}), follow=True
+        )
+        self.assertRedirects(response, reverse('login'))
+        self.assertContains(
+            response, _("You are not logged in! Please log in.")
+        )
+
+        self.client.force_login(get_user_model().objects.get(pk=1))
+        response = self.client.get(
+            reverse('task_detail', kwargs={"pk": 1}), follow=True
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'tasks/task_detail.html')
+        self.assertContains(response, "Task 1")
+        self.assertContains(response, "Peter Parker")
+        self.assertContains(response, "Bruce Wayne")
+        self.assertContains(response, "in progress")
+        self.assertContains(response, "mine")
+        self.assertContains(response, "not mine")
 
     # Update
     def test_update_task(self):
