@@ -14,5 +14,13 @@
             "name": "not mine",
             "created_at": "2023-12-14T12:00:00Z"
         }
+    },
+    {
+        "model": "labels.label",
+        "pk": 3,
+        "fields": {
+            "name": "without task",
+            "created_at": "2023-12-14T12:00:00Z"
+        }
     }
 ]

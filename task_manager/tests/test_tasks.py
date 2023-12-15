@@ -35,11 +35,11 @@ class CRUDforTasks(TestCase):
         self.assertRedirects(response, reverse('tasks'))
         self.assertContains(response, _('Task is successfully created'))
 
-        last_tasks = Task.objects.last()
+        last_task = Task.objects.last()
         count_tasks = Task.objects.count()
-        self.assertEqual(last_tasks.name, "Finish project")
-        self.assertEqual(str(last_tasks), "Finish project")
-        self.assertEqual(last_tasks.status.name, "in progress")
+        self.assertEqual(last_task.name, "Finish project")
+        self.assertEqual(str(last_task), "Finish project")
+        self.assertEqual(last_task.status.name, "in progress")
         self.assertEqual(count_tasks, 3)
 
     # Read
@@ -57,7 +57,7 @@ class CRUDforTasks(TestCase):
         self.assertEqual(len(response.context['tasks']), 2)
         self.assertContains(response, "Task 1")
         self.assertContains(response, "Task 2")
-        
+
         response = self.client.get(
             reverse('tasks'), {'own_tasks': True}, follow=True
         )
@@ -66,7 +66,7 @@ class CRUDforTasks(TestCase):
         self.assertEqual(len(response.context['tasks']), 1)
         self.assertContains(response, "Task 1")
         self.assertNotContains(response, "Task 2")
-    
+
     def test_task_detail(self):
         response = self.client.get(
             reverse('task_detail', kwargs={"pk": 1}), follow=True
@@ -135,7 +135,6 @@ class CRUDforTasks(TestCase):
         response = self.client.get(
             reverse('task_delete', kwargs={"pk": 1}), follow=True
         )
-        # self.assertTemplateUsed(response, 'delete_form.html')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Task 1")
 
