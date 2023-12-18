@@ -16,21 +16,20 @@ class RegisterUserForm(UserCreationForm):
         )
 
 
+PASS_WIDGET = forms.PasswordInput(attrs={"class": "form-control"})
+
+
 class UpdateUserForm(UserChangeForm):
     password = None
 
     password1 = forms.CharField(
         label=_('Password'),
-        widget=forms.PasswordInput(
-            attrs={"class": "form-control"}
-        ),
+        widget=PASS_WIDGET,
         help_text=_('Your password must be at least 3 characters long.'),
     )
     password2 = forms.CharField(
         label=_('Password confirmation'),
-        widget=forms.PasswordInput(
-            attrs={"class": "form-control"}
-        ),
+        widget=PASS_WIDGET,
         help_text=_('To confirm, please enter your password again.'),
     )
 
