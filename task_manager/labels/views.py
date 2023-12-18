@@ -4,20 +4,20 @@ from task_manager.labels.models import Label
 from task_manager.labels.forms import LabelForm
 
 from task_manager.mixins import (
-    LoginRequiredMixin, DeleteProtectionMixin, ObjectContextMixin
+    CustomLoginMixin, DeleteProtectionMixin, ObjectContextMixin
 )
 
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
 
 
-class LabelsListView(LoginRequiredMixin, ListView):
+class LabelsListView(CustomLoginMixin, ListView):
     template_name = 'labels/index.html'
     model = Label
     context_object_name = 'labels'
 
 
-class LabelCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class LabelCreateView(CustomLoginMixin, SuccessMessageMixin, CreateView):
     template_name = 'form.html'
     model = Label
     form_class = LabelForm
@@ -29,7 +29,7 @@ class LabelCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     }
 
 
-class LabelUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class LabelUpdateView(CustomLoginMixin, SuccessMessageMixin, UpdateView):
     template_name = 'form.html'
     model = Label
     form_class = LabelForm

@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin
 
 
-class LoginRequiredMixin(LoginRequiredMixin):
+class CustomLoginMixin(LoginRequiredMixin):
     login_url = reverse_lazy('login')
 
     def handle_no_permission(self):
@@ -18,7 +18,7 @@ class LoginRequiredMixin(LoginRequiredMixin):
         return super().handle_no_permission()
 
 
-class PermitDeleteUserMixin(UserPassesTestMixin):
+class PermitModifyUserMixin(UserPassesTestMixin):
     def test_func(self):
         return self.get_object().id == self.request.user.id
 

@@ -5,17 +5,17 @@ from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
 from .forms import StatusForm
 from task_manager.mixins import (
-    LoginRequiredMixin, ObjectContextMixin, DeleteProtectionMixin
+    CustomLoginMixin, ObjectContextMixin, DeleteProtectionMixin
 )
 
 
-class StatusesListView(LoginRequiredMixin, ListView):
+class StatusesListView(CustomLoginMixin, ListView):
     template_name = 'statuses/index.html'
     model = Status
     context_object_name = 'statuses'
 
 
-class StatusCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class StatusCreateView(CustomLoginMixin, SuccessMessageMixin, CreateView):
     template_name = 'form.html'
     model = Status
     form_class = StatusForm
@@ -27,7 +27,7 @@ class StatusCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     }
 
 
-class StatusUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class StatusUpdateView(CustomLoginMixin, SuccessMessageMixin, UpdateView):
     template_name = 'form.html'
     model = Status
     form_class = StatusForm
@@ -40,7 +40,7 @@ class StatusUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 
 class StatusDeleteView(
-        LoginRequiredMixin, ObjectContextMixin, DeleteProtectionMixin,
+        CustomLoginMixin, ObjectContextMixin, DeleteProtectionMixin,
         SuccessMessageMixin, DeleteView):
     template_name = 'delete_form.html'
     model = Status

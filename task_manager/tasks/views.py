@@ -3,7 +3,7 @@ from django.views.generic import (
 )
 from django.contrib.messages.views import SuccessMessageMixin
 from task_manager.mixins import (
-    LoginRequiredMixin, ObjectContextMixin
+    CustomLoginMixin, ObjectContextMixin
 )
 from .mixins import PermitDeleteTaskMixin
 from django.utils.translation import gettext_lazy as _
@@ -15,7 +15,7 @@ from .filters import TaskFilter
 from django_filters.views import FilterView
 
 
-class TasksListView(LoginRequiredMixin, FilterView):
+class TasksListView(CustomLoginMixin, FilterView):
     template_name = 'tasks/index.html'
     model = Task
     context_object_name = 'tasks'
@@ -25,7 +25,7 @@ class TasksListView(LoginRequiredMixin, FilterView):
     }
 
 
-class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class TaskCreateView(CustomLoginMixin, SuccessMessageMixin, CreateView):
     template_name = 'form.html'
     model = Task
     form_class = TaskForm
@@ -41,12 +41,12 @@ class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 
-class DetailTaskView(LoginRequiredMixin, SuccessMessageMixin, DetailView):
+class DetailTaskView(CustomLoginMixin, SuccessMessageMixin, DetailView):
     template_name = 'tasks/task_detail.html'
     model = Task
 
 
-class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class TaskUpdateView(CustomLoginMixin, SuccessMessageMixin, UpdateView):
     template_name = 'form.html'
     model = Task
     form_class = TaskForm
@@ -59,7 +59,7 @@ class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 
 class TaskDeleteView(
-        LoginRequiredMixin, PermitDeleteTaskMixin,
+        CustomLoginMixin, PermitDeleteTaskMixin,
         SuccessMessageMixin, ObjectContextMixin,
         DeleteView):
     template_name = 'delete_form.html'
