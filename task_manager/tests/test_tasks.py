@@ -4,10 +4,19 @@ from django.urls import reverse
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
+from task_manager.tests.parser_dump_data import parse_dump_data
+from django.conf import settings
 
 
 class TaskViewsTestCase(TestCase):
     fixtures = ['tasks.json', 'users.json', 'statuses.json', 'labels.json']
+
+    def setUp(self):
+        tasks_data = parse_dump_data(settings.DUMP_DATA_PATH, "tasks")
+        self.new_task = tasks_data["new_task"]
+        self.new_task["status"] = Status.objects.get(pk=1).pk
+        self.update_task = tasks_data["update_task"]
+        self.update_task["status"] = Status.objects.get(pk=2).pk
 
     # Create
     def test_create_task(self):
@@ -24,10 +33,7 @@ class TaskViewsTestCase(TestCase):
 
         response = self.client.post(
             reverse('task_create'),
-            data={
-                "name": "Finish project",
-                "status": Status.objects.get(pk=1).pk,
-            },
+            data=self.new_task,
             follow=True
         )
         self.assertRedirects(response, reverse('tasks'))
@@ -105,10 +111,7 @@ class TaskViewsTestCase(TestCase):
 
         response = self.client.post(
             reverse('task_update', kwargs={"pk": 1}),
-            data={
-                "name": "New Task 1",
-                "status": Status.objects.get(pk=2).pk,
-            },
+            data=self.update_task,
             follow=True
         )
         new_task = Task.objects.get(pk=1)

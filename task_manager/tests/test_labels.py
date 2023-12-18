@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from task_manager.tests.parser_dump_data import parse_dump_data
 from django.conf import settings
 
+
 class LabelViewsTestCase(TestCase):
     fixtures = ['tasks.json', 'users.json', 'statuses.json', 'labels.json']
 

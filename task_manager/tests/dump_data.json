@@ -22,9 +22,6 @@
             "password2": "wow"
         }
     },
-    "tasks": {
-        
-    },
     "statuses": {
         "new_status": {
             "name": "nevermind"
@@ -39,6 +36,14 @@
         },
         "update_label": {
             "name": "forget"
+        }
+    },
+    "tasks": {
+        "new_task": {
+            "name": "Finish project"
+        },
+        "update_task": {
+            "name": "New Task 1"
         }
     }
 }
