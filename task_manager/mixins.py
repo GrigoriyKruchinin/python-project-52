@@ -8,14 +8,15 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 
 
 class CustomLoginMixin(LoginRequiredMixin):
-    login_url = reverse_lazy('login')
+    login_url = 'login'
 
-    def handle_no_permission(self):
-        if not self.request.user.is_authenticated:
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
             message = _("You are not logged in! Please log in.")
-            messages.error(self.request, message)
+            messages.error(request, message)
             return redirect(self.login_url)
-        return super().handle_no_permission()
+
+        return super().dispatch(request, *args, **kwargs)
 
 
 class PermitModifyUserMixin(UserPassesTestMixin):
