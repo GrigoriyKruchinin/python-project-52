@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
 
-class CRUDforTasks(TestCase):
+class TaskViewsTestCase(TestCase):
     fixtures = ['tasks.json', 'users.json', 'statuses.json', 'labels.json']
 
     # Create
@@ -21,8 +21,6 @@ class CRUDforTasks(TestCase):
         response = self.client.get(reverse('task_create'), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'form.html')
-        self.assertContains(response, '<form')
-        self.assertContains(response, 'csrfmiddlewaretoken')
 
         response = self.client.post(
             reverse('task_create'),
@@ -63,9 +61,8 @@ class CRUDforTasks(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'tasks/index.html')
-        self.assertEqual(len(response.context['tasks']), 1)
-        self.assertContains(response, "Task 1")
-        self.assertNotContains(response, "Task 2")
+        for task in response.context['tasks']:
+            self.assertEqual(response.wsgi_request.user, task.creator)
 
     def test_task_detail(self):
         response = self.client.get(

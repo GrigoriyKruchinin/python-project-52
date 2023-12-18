@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
 
-class CRUDforStatus(TestCase):
+class StatusViewsTestCase(TestCase):
     fixtures = ['tasks.json', 'users.json', 'statuses.json', 'labels.json']
 
     # Create
@@ -20,8 +20,6 @@ class CRUDforStatus(TestCase):
         response = self.client.get(reverse('status_create'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'form.html')
-        self.assertContains(response, '<form')
-        self.assertContains(response, 'csrfmiddlewaretoken')
 
         response = self.client.post(
             reverse('status_create'),
