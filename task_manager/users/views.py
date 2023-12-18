@@ -1,14 +1,18 @@
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.contrib.messages.views import SuccessMessageMixin
-from django.utils.translation import gettext_lazy as _
-from django.urls import reverse_lazy
+from django.views.generic import ListView
+from task_manager.views import (
+    CustomCreateView, CustomUpdateView, CustomDeleteView
+)
 
 from task_manager.users.models import User
 from .forms import RegisterUserForm, UpdateUserForm
+
 from task_manager.mixins import (
-    CustomLoginMixin, PermitModifyUserMixin, ObjectContextMixin,
+    CustomLoginMixin, PermitModifyUserMixin,
     DeleteProtectionMixin
 )
+
+from django.utils.translation import gettext_lazy as _
+from django.urls import reverse_lazy
 
 
 class UsersListView(ListView):
@@ -17,8 +21,7 @@ class UsersListView(ListView):
     context_object_name = 'users'
 
 
-class UserCreateView(SuccessMessageMixin, CreateView):
-    template_name = 'form.html'
+class UserCreateView(CustomCreateView):
     model = User
     form_class = RegisterUserForm
     success_url = reverse_lazy('login')
@@ -31,8 +34,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
 
 class UserUpdateView(
         CustomLoginMixin, PermitModifyUserMixin,
-        SuccessMessageMixin, UpdateView):
-    template_name = 'form.html'
+        CustomUpdateView):
     model = User
     form_class = UpdateUserForm
     success_url = reverse_lazy('users')
@@ -45,9 +47,7 @@ class UserUpdateView(
 
 class UserDeleteView(
         CustomLoginMixin, PermitModifyUserMixin,
-        DeleteProtectionMixin, ObjectContextMixin,
-        SuccessMessageMixin, DeleteView):
-    template_name = 'delete_form.html'
+        DeleteProtectionMixin, CustomDeleteView):
     model = User
     success_url = reverse_lazy('users')
     success_message = _('User successfully deleted')

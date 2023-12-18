@@ -1,11 +1,12 @@
-from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView
+from task_manager.views import (
+    CustomCreateView, CustomUpdateView, CustomDeleteView
+)
+
 from task_manager.labels.models import Label
 from task_manager.labels.forms import LabelForm
 
-from task_manager.mixins import (
-    CustomLoginMixin, DeleteProtectionMixin, ObjectContextMixin
-)
+from task_manager.mixins import CustomLoginMixin, DeleteProtectionMixin
 
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
@@ -17,8 +18,7 @@ class LabelsListView(CustomLoginMixin, ListView):
     context_object_name = 'labels'
 
 
-class LabelCreateView(CustomLoginMixin, SuccessMessageMixin, CreateView):
-    template_name = 'form.html'
+class LabelCreateView(CustomLoginMixin, CustomCreateView):
     model = Label
     form_class = LabelForm
     success_message = _("Label is successfully created")
@@ -29,8 +29,7 @@ class LabelCreateView(CustomLoginMixin, SuccessMessageMixin, CreateView):
     }
 
 
-class LabelUpdateView(CustomLoginMixin, SuccessMessageMixin, UpdateView):
-    template_name = 'form.html'
+class LabelUpdateView(CustomLoginMixin, CustomUpdateView):
     model = Label
     form_class = LabelForm
     success_url = reverse_lazy('labels')
@@ -42,9 +41,7 @@ class LabelUpdateView(CustomLoginMixin, SuccessMessageMixin, UpdateView):
 
 
 class LabelDeleteView(
-        DeleteProtectionMixin, ObjectContextMixin,
-        SuccessMessageMixin, DeleteView):
-    template_name = 'delete_form.html'
+        DeleteProtectionMixin, CustomDeleteView):
     model = Label
     success_message = _("Label is successfully deleted")
     success_url = reverse_lazy('labels')
