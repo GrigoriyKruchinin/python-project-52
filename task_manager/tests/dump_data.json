@@ -26,9 +26,19 @@
         
     },
     "statuses": {
-        
+        "new_status": {
+            "name": "nevermind"
+        },
+        "update_status": {
+            "name": "on hold"
+        }
     },
     "labels": {
-        
+        "new_label": {
+            "name": "New label"
+        },
+        "update_label": {
+            "name": "forget"
+        }
     }
 }

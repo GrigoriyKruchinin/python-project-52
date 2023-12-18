@@ -3,10 +3,17 @@ from django.urls import reverse
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
+from task_manager.tests.parser_dump_data import parse_dump_data
+from django.conf import settings
 
 
 class StatusViewsTestCase(TestCase):
     fixtures = ['tasks.json', 'users.json', 'statuses.json', 'labels.json']
+
+    def setUp(self):
+        statuses_data = parse_dump_data(settings.DUMP_DATA_PATH, "statuses")
+        self.new_status = statuses_data["new_status"]
+        self.update_status = statuses_data["update_status"]
 
     # Create
     def test_create_status(self):
@@ -23,7 +30,7 @@ class StatusViewsTestCase(TestCase):
 
         response = self.client.post(
             reverse('status_create'),
-            data={"name": "nevermind"},
+            data=self.new_status,
             follow=True
         )
         self.assertRedirects(response, reverse('statuses'))
@@ -70,7 +77,7 @@ class StatusViewsTestCase(TestCase):
 
         response = self.client.post(
             reverse('status_update', kwargs={"pk": 1}),
-            data={"name": "on hold"},
+            data=self.update_status,
             follow=True
         )
         self.assertRedirects(response, reverse('statuses'))

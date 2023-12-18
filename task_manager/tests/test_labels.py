@@ -3,10 +3,16 @@ from django.urls import reverse
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
-
+from task_manager.tests.parser_dump_data import parse_dump_data
+from django.conf import settings
 
 class LabelViewsTestCase(TestCase):
     fixtures = ['tasks.json', 'users.json', 'statuses.json', 'labels.json']
+
+    def setUp(self):
+        labels_data = parse_dump_data(settings.DUMP_DATA_PATH, "labels")
+        self.new_label = labels_data["new_label"]
+        self.update_label = labels_data["update_label"]
 
     # Create
     def test_create_label(self):
@@ -23,7 +29,7 @@ class LabelViewsTestCase(TestCase):
 
         response = self.client.post(
             reverse('label_create'),
-            data={"name": "New label"},
+            data=self.new_label,
             follow=True
         )
         self.assertRedirects(response, reverse('labels'))
@@ -71,7 +77,7 @@ class LabelViewsTestCase(TestCase):
 
         response = self.client.post(
             reverse('label_update', kwargs={"pk": 1}),
-            data={"name": "forget"},
+            data=self.update_label,
             follow=True
         )
         new_label = Label.objects.get(pk=1)
