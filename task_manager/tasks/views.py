@@ -1,5 +1,5 @@
 from django.views.generic import (
-    ListView, CreateView, UpdateView, DeleteView, DetailView
+    CreateView, UpdateView, DeleteView, DetailView
 )
 from django.contrib.messages.views import SuccessMessageMixin
 from task_manager.mixins import (
@@ -12,27 +12,14 @@ from django.urls import reverse_lazy
 from task_manager.tasks.models import Task
 from .forms import TaskForm
 from .filters import TaskFilter
+from django_filters.views import FilterView
 
 
-class TasksListView(LoginRequiredMixin, ListView):
+class TasksListView(LoginRequiredMixin, FilterView):
     template_name = 'tasks/index.html'
     model = Task
     context_object_name = 'tasks'
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        self.filterset = TaskFilter(
-            data=self.request.GET if self.request.GET else None,
-            queryset=queryset,
-            user=self.request.user
-        )
-        return self.filterset.qs
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form'] = self.filterset.form
-        return context
-
+    filterset_class = TaskFilter
     extra_context = {
         'button_text': _('Show'),
     }
