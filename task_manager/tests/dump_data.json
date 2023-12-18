@@ -1,0 +1,34 @@
+{
+    "users": {
+        "new_user": {
+            "first_name": "Rayan",
+            "last_name": "Renolds",
+            "username": "Deadpool",
+            "password1": "r@$$0m@h@",
+            "password2": "r@$$0m@h@"
+        },
+        "wrong_update_user": {
+            "first_name": "Miles",
+            "last_name": "Morales",
+            "username": "New_Spider_Man",
+            "password1": "wow",
+            "password2": "wrong_password"
+        },
+        "success_update_user": {
+            "first_name": "Miles",
+            "last_name": "Morales",
+            "username": "New_Spider_Man",
+            "password1": "wow",
+            "password2": "wow"
+        }
+    },
+    "tasks": {
+        
+    },
+    "statuses": {
+        
+    },
+    "labels": {
+        
+    }
+}

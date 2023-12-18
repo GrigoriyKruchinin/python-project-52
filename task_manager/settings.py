@@ -167,3 +167,5 @@ ROLLBAR = {
     'code_version': '1.0',
     'root': BASE_DIR,
 }
+
+DUMP_DATA_PATH = os.path.join(BASE_DIR, 'task_manager', 'tests', 'dump_data.json')

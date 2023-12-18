@@ -3,10 +3,18 @@ from django.urls import reverse
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
+from task_manager.tests.parser_dump_data import parse_dump_data
+from django.conf import settings
 
 
 class UserViewsTestCase(TestCase):
     fixtures = ['tasks.json', 'users.json', 'statuses.json', 'labels.json']
+
+    def setUp(self):
+        users_data = parse_dump_data(settings.DUMP_DATA_PATH, "users")
+        self.new_user = users_data["new_user"]
+        self.wrong_update_user = users_data["wrong_update_user"]
+        self.success_update_user = users_data["success_update_user"]
 
     # Create
     def test_registration(self):
@@ -16,13 +24,7 @@ class UserViewsTestCase(TestCase):
 
         response = self.client.post(
             reverse('user_create'),
-            data={
-                'first_name': "Rayan",
-                'last_name': "Renolds",
-                'username': "Deadpool",
-                'password1': "r@$$0m@h@",
-                'password2': "r@$$0m@h@"
-            },
+            data=self.new_user,
             follow=True,
         )
         self.assertRedirects(response, reverse('login'))
@@ -78,13 +80,7 @@ class UserViewsTestCase(TestCase):
 
         response = self.client.post(
             reverse('user_update', kwargs={'pk': 1}),
-            data={
-                'first_name': "Miles",
-                'last_name': "Morales",
-                'username': "New_Spider_Man",
-                'password1': "wow",
-                'password2': "wrong_password"
-            },
+            data=self.wrong_update_user,
             follow=True
         )
         self.assertFormError(
@@ -96,13 +92,7 @@ class UserViewsTestCase(TestCase):
 
         response = self.client.post(
             reverse('user_update', kwargs={'pk': 1}),
-            data={
-                'first_name': "Miles",
-                'last_name': "Morales",
-                'username': "New_Spider_Man",
-                'password1': "wow",
-                'password2': "wow"
-            },
+            data=self.success_update_user,
             follow=True
         )
         self.assertRedirects(response, reverse('users'))
