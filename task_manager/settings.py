@@ -168,4 +168,6 @@ ROLLBAR = {
     'root': BASE_DIR,
 }
 
-DUMP_DATA_PATH = os.path.join(BASE_DIR, 'task_manager', 'tests', 'dump_data.json')
+DUMP_DATA_PATH = os.path.join(
+    BASE_DIR, 'task_manager', 'tests', 'fixtures', 'dump_data.json'
+)
