@@ -1,6 +1,6 @@
 databases:
   - name: task_manager_db
-    databaseName: task_manager_ggfo
+    databaseName: task_manager_2w9b
     user: grisha
 
 services:
