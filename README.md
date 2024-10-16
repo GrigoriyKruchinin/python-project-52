@@ -7,7 +7,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9e4054d13d4b4b33f6a8/test_coverage)](https://codeclimate.com/github/GrigoriyKruchinin/python-project-52/test_coverage)
 <!-- [![Maintainability](https://api.codeclimate.com/v1/badges/9e4054d13d4b4b33f6a8/maintainability)](https://codeclimate.com/github/GrigoriyKruchinin/python-project-52/maintainability) -->
 
-__"Task manager__ - четвертый проект, разработанный в рамках обучения на курсе Хекслет. Это сайт, который позволяет распределять задачи среди пользователей и следить за их выполнением.
+__"Task manager__ - это сайт, который позволяет распределять задачи среди пользователей и следить за их выполнением.
 
 ***
 ## Перед установкой
